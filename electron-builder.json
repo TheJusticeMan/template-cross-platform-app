@@ -1,0 +1,23 @@
+{
+  "appId": "com.template.crossplatform",
+  "productName": "Cross-Platform App",
+  "directories": {
+    "output": "electron-dist",
+    "buildResources": "electron"
+  },
+  "files": [
+    "dist/**/*",
+    "electron/main.js"
+  ],
+  "mac": {
+    "category": "public.app-category.utilities",
+    "target": ["dmg", "zip"]
+  },
+  "win": {
+    "target": ["nsis", "portable"]
+  },
+  "linux": {
+    "target": ["AppImage", "deb"],
+    "category": "Utility"
+  }
+}
