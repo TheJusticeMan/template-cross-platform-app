@@ -1,164 +1,185 @@
 # Contributing Guide
 
-Extending this template—add features, maintain purity, honor the guidelines.
+Help improve the Cross-Platform TypeScript App. Contributions welcome from users and developers.
 
-## Philosophy
+## For Users
 
-This template is **vanilla-first**: no frameworks, no bloat. Every line serves a purpose. When you contribute:
+### Report Bugs
 
-- **Keep it lean**: Question every dependency. Does it truly add value, or just comfort?
-- **Document thoroughly**: TsDoc is mandatory (enforced by linting). If it's not worth documenting, it's not worth adding.
-- **Build for users**: Accessibility and ethics are defaults, not afterthoughts. GUIs are the highest abstraction—respect that.
+Found a problem? Help us fix it:
 
-## Before You Start
+1. **Check existing issues**: [GitHub Issues](https://github.com/TheJusticeMan/template-cross-platform-app/issues)
+2. **Create new issue** with:
+   - Clear title (e.g., "Button doesn't respond on mobile")
+   - Steps to reproduce
+   - Expected vs. actual behavior
+   - Screenshots if relevant
+   - Your environment (OS, browser/app version)
 
-1. Read [CODE_GUIDELINES.md](../CODE_GUIDELINES.md)—it's the bible for this project
-2. Set up your environment: `npm install`, `npm run dev`
-3. Run `npm run lint` and `npm run docs:validate` to ensure baseline passes
-4. If using AI tools (Copilot, Cursor), point them at CODE_GUIDELINES.md for context
+### Suggest Features
 
-## Adding Features
+Have an idea? Share it:
 
-### 1. Plan
+1. **Open discussion**: [GitHub Discussions](https://github.com/TheJusticeMan/template-cross-platform-app/discussions)
+2. **Explain the use case**: Why is this needed?
+3. **Consider accessibility**: Will it work for all users?
 
-Ask yourself:
-- Does this align with vanilla purity? (No React, Vue, etc.)
-- Is it cross-platform? (Works in browser, Electron, Capacitor?)
-- Can I document it clearly?
+### Improve Documentation
 
-If yes to all, proceed.
+Spot unclear docs or typos:
 
-### 2. Write TsDoc First
+1. **Report**: Open issue with "docs:" prefix
+2. **Or edit directly**: Submit pull request with fixes
 
-Before coding, draft the TsDoc comment:
+## For Developers
 
+### Before Contributing
+
+1. **Read**: [CODE_GUIDELINES.md](../CODE_GUIDELINES.md) for coding standards
+2. **Check**: [DeveloperGuide.md](DeveloperGuide.md) for build/test instructions
+3. **Discuss**: Open issue before major changes
+
+### Contribution Workflow
+
+**1. Fork & Clone**
+```bash
+git clone https://github.com/your-username/template-cross-platform-app
+cd template-cross-platform-app
+npm install
+```
+
+**2. Create Branch**
+```bash
+git checkout -b feature/your-feature-name
+```
+
+**3. Make Changes**
+- Follow existing code style
+- Write TsDoc comments (mandatory)
+- Keep changes focused
+
+**4. Test Locally**
+```bash
+npm run lint        # Check code quality
+npm run docs:validate  # Validate documentation
+npm run build       # Ensure builds successfully
+npm run dev         # Test in browser
+npm run electron:dev  # Test in Electron
+```
+
+**5. Generate Documentation**
+```bash
+npm run docs:generate
+```
+
+**6. Commit**
+```bash
+git add .
+git commit -m "Add feature: descriptive message"
+```
+
+Pre-commit hooks will run lint and docs validation automatically.
+
+**7. Push & Pull Request**
+```bash
+git push origin feature/your-feature-name
+```
+
+Open pull request on GitHub with:
+- Clear description of changes
+- Why it's needed
+- Screenshots (if UI changes)
+- Test results
+
+### Code Standards
+
+**Mandatory TsDoc**:
 ```typescript
 /**
- * @class ContextualToggle
- * A toggle button that adapts label based on state, with ARIA support.
+ * @class ComponentName
+ * Brief description of purpose.
  * 
- * @param {string} onLabel - Label when toggle is on (e.g., "Mute").
- * @param {string} offLabel - Label when toggle is off (e.g., "Unmute").
- * @returns {HTMLElement} - The toggle button element.
+ * @param {Type} paramName - Parameter description.
+ * @returns {ReturnType} - Return value description.
  * 
  * @example
- * const muteBtn = new ContextualToggle("Mute", "Unmute");
- * document.body.append(muteBtn.element);
+ * const comp = new ComponentName(arg);
  * 
  * @remarks
- * - Accessibility: Auto-sets aria-pressed, role="switch", keyboard-navigable.
- * - Ethics: Clear labels—no manipulation (e.g., not "Agree to All" by default).
- * - Thematic Tie: Like Hack by Will—context-aware, adapts to reality.
- * - Version: 1.0.0
- * - Author: [Your Name]
+ * - Accessibility: ARIA support details
+ * - Performance: Benchmark info
  */
 ```
 
-This is your contract. Code to fulfill it.
+**Vanilla Purity**:
+- No frameworks (React, Vue, Angular)
+- Native DOM APIs only
+- No jQuery or utility libraries
+- Justify any new dependencies
 
-### 3. Implement
+**Accessibility First**:
+- Semantic HTML
+- ARIA attributes where needed
+- Keyboard navigation support
+- Screen reader compatible
 
-Keep it simple. Use native DOM APIs:
-```typescript
-class ContextualToggle {
-  private state = false;
-  element: HTMLButtonElement;
+### Documentation Updates
 
-  constructor(private onLabel: string, private offLabel: string) {
-    this.element = document.createElement('button');
-    this.element.setAttribute('role', 'switch');
-    this.element.addEventListener('click', () => this.toggle());
-    this.updateLabel();
-  }
+When code changes:
 
-  private toggle(): void {
-    this.state = !this.state;
-    this.updateLabel();
-  }
+1. Update TsDoc comments in source
+2. Run `npm run docs:generate` to update API docs
+3. Update user guides if behavior changes
+4. Commit code + docs together
 
-  private updateLabel(): void {
-    this.element.textContent = this.state ? this.onLabel : this.offLabel;
-    this.element.setAttribute('aria-pressed', String(this.state));
-  }
-}
+### Code Review Expectations
+
+Reviewers check:
+- ✓ TsDoc complete and accurate
+- ✓ Linting passes
+- ✓ No new dependencies (or justified)
+- ✓ Accessible (ARIA, keyboard, semantic HTML)
+- ✓ Cross-platform tested
+- ✓ Bundle size stays under limit
+
+### Development Guidelines
+
+**Keep it Minimal**:
+- Question every line of code
+- Remove unused code
+- Avoid over-abstraction
+- Clear > clever
+
+**Performance Matters**:
+- <1ms for UI operations
+- GPU-accelerated animations
+- Minimal DOM manipulation
+
+**Accessibility Non-Negotiable**:
+- Test with keyboard only
+- Use screen reader
+- Check DevTools Accessibility Inspector
+
+### Project Structure
+
+```
+src/              # TypeScript source (document all exports)
+docs/             # User-facing documentation  
+docs/generated/   # Auto-generated API docs
+scripts/          # Build scripts
+electron/         # Electron main process
 ```
 
-No magic. No hidden complexity. Readable, auditable, truthful.
+### Getting Help
 
-### 4. Test Locally
+- **Questions**: [GitHub Discussions](https://github.com/TheJusticeMan/template-cross-platform-app/discussions)
+- **Bugs**: [GitHub Issues](https://github.com/TheJusticeMan/template-cross-platform-app/issues)
+- **Security**: See SECURITY.md
 
-- `npm run dev` → verify in browser
-- `npm run electron:dev` → verify in Electron
-- `npm run cap:build && npm run cap:open:android` → verify on mobile (if applicable)
+## License
 
-### 5. Document
+By contributing, you agree your contributions will be licensed under MIT License.
 
-Update `docs/API.md` with your new class/function. If it's a major feature, add a section to `docs/Setup.md` or `docs/Build.md`.
+---
 
-### 6. Lint & Validate
-
-```bash
-npm run lint:fix
-npm run docs:validate
-```
-
-Fix any errors. Linting is non-negotiable—it's the trust layer.
-
-### 7. Commit & PR
-
-```bash
-git checkout -b feature/contextual-toggle
-git add .
-git commit -m "Add ContextualToggle with ARIA support"
-git push origin feature/contextual-toggle
-```
-
-Open PR on GitHub. In description:
-- Explain why feature is needed
-- Show before/after (screenshots if GUI change)
-- Confirm all checks pass (lint, build, docs)
-
-## Avoiding Bloat
-
-**Red Flags**:
-- Adding dependencies > 100KB (question it hard)
-- Abstractions that hide simple operations (e.g., jQuery for `querySelector`)
-- Features that only work in one platform (defeats cross-platform goal)
-
-**Green Lights**:
-- Reusable patterns (e.g., toggle, modal, tooltip) with TsDoc
-- Performance optimizations (e.g., debounce, memoization)
-- Accessibility improvements (ARIA, keyboard nav)
-
-When in doubt: **Ask**. Open a Discussion issue first. Community feedback prevents bloat creep.
-
-## Code Review Expectations
-
-Reviewers will check:
-- ✅ TsDoc complete and accurate
-- ✅ Linting passes (`npm run lint`)
-- ✅ No new dependencies (or justified if needed)
-- ✅ Accessible (ARIA, semantic HTML)
-- ✅ Cross-platform tested
-- ✅ Bundle size still <50KB (check with `du -sh dist/`)
-
-If any fail, we'll request changes. Not personal—just maintaining standards. Like truth-seeking, it requires rigor.
-
-## Long-Term Maintenance
-
-This template is a **foundation**, not a framework. As you extend:
-
-- Keep `/src` minimal (under 10 files if possible)
-- Break large classes into modules (e.g., `src/components/Toggle.ts`)
-- Update `/docs` when behavior changes
-- Bump version in `package.json` for releases
-
-## Join the Community
-
-- **Discussions**: Ask questions, propose features
-- **Issues**: Report bugs (use `Troubleshooting.md` first)
-- **PRs**: Contribute code, docs, fixes
-
-Every contribution strengthens the foundation. Build with care—your code might outlive you. Make it something you'd be proud to return to, like a Polaroid of clear intentions.
-
-Thank you for contributing. Together, we keep vanilla alive.
+**Thank you** for helping improve this project!

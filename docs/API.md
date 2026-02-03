@@ -1,83 +1,194 @@
 # API Documentation
 
-Auto-generated overview of public classes, functions, and interfaces. This file is scaffolded from TsDoc comments in the codebase.
+High-level API overview for customizing and extending the application. This guide is for power users and developers.
 
-> **Note**: To regenerate this file, run `npm run docs:generate` (requires TypeDoc as optional dev dependency, or manually extract from source).
+## For Power Users
 
-## Classes
+The application provides simple, accessible ways to customize behavior without writing code:
 
-### `App`
+### Configuration
 
-Main application class. Manages UI state, event handlers, and environment detection.
+Edit `src/index.html` to change UI text and structure:
 
-**Constructor**: `new App()`
-- Initializes the application
-- Sets up DOM event listeners
-- Detects runtime environment (browser/Electron/Capacitor)
+```html
+<!-- Change button label -->
+<button id="clickButton" class="button">Start Counting</button>
 
-**Methods**:
+<!-- Change page title -->
+<title>My Custom App</title>
+```
 
-#### `private init(): void`
-Waits for DOM to load, then calls `setup()`. Like patience before truth—don't rush the foundation.
+Edit `src/index.css` to customize appearance:
 
-#### `private setup(): void`
-Grabs button/counter elements from DOM, attaches click handler, logs environment.
+```css
+/* Change button colors */
+.button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
 
-#### `private handleClick(): void`
-Increments click count, updates UI, animates button. Simple cause-effect—no hidden side effects.
+/* Adjust layout */
+.container {
+  max-width: 1200px; /* Wider layout */
+}
+```
 
-**Parameters**: None
-**Returns**: void
-**Accessibility**: Button click is keyboard-accessible (native HTML behavior).
+### Accessibility Features
 
-#### `private updateCounter(): void`
-Sets counter text to current click count. Pure display logic.
+All components include built-in accessibility:
 
-**Parameters**: None
-**Returns**: void
+- **Keyboard Navigation**: Tab between elements, Enter/Space to activate
+- **Screen Reader Support**: Semantic HTML and ARIA attributes
+- **High Contrast**: Works with system high-contrast modes
+- **Responsive**: Adapts to different screen sizes
 
-#### `private animateButton(): void`
-Scales button down briefly (0.95) for tactile feedback. Resets after 100ms.
+**Testing**: Use browser DevTools Accessibility Inspector or screen readers (NVDA, JAWS, VoiceOver).
 
-**Parameters**: None
-**Returns**: void
-**Performance**: <1ms, no layout thrashing (transform is GPU-accelerated).
+## For Developers
 
-#### `private logEnvironment(): void`
-Detects if running in Electron, Capacitor, or browser via user-agent and global objects. Logs to console.
+### Core Classes
 
-**Parameters**: None
-**Returns**: void
-**Ethics**: Transparent logging—no hidden tracking, just environment awareness.
+The application is built with documented TypeScript classes. See auto-generated technical documentation:
 
-**Properties**:
-- `clickCount: number` - Private state, zero-initialized
-- `button: HTMLElement | null` - Reference to button DOM node
-- `counter: HTMLElement | null` - Reference to counter display node
+**[Full API Reference →](generated/README.md)**
 
-## Interfaces
+### Main Application Class
 
-_(None defined yet. Add your own as you extend the app—document with TsDoc!)_
+The `App` class manages application state and UI interactions:
 
-## Types
+```typescript
+/**
+ * Main application class managing UI state, event handlers,
+ * and cross-platform environment detection.
+ */
+class App {
+  constructor();
+  // Initializes app, sets up event listeners
+}
+```
 
-_(None defined yet. TypeScript primitives used directly. Define custom types as complexity grows, always with TsDoc.)_
+**Key Methods:**
+- `init()`: Waits for DOM ready, then calls setup
+- `setup()`: Grabs DOM elements, attaches event handlers
+- `handleClick()`: Increments counter, updates UI
+- `logEnvironment()`: Detects runtime (browser/Electron/Capacitor)
 
-## Functions (Top-Level)
+**Full details**: See [generated/classes/App.md](generated/classes/App.md) for complete API documentation including parameters, return types, and examples.
 
-_(None exported yet. Classes encapsulate logic. If you add utility functions, document them here.)_
+### Environment Detection
+
+Detect runtime environment for conditional features:
+
+```typescript
+const isElectron = navigator.userAgent.toLowerCase().includes('electron');
+const isCapacitor = !!(window as Window & { Capacitor?: unknown }).Capacitor;
+
+if (isElectron) {
+  // Desktop-specific features
+} else if (isCapacitor) {
+  // Mobile-specific features
+} else {
+  // Web-specific features
+}
+```
+
+### Creating Custom Components
+
+**Step 1: Write TsDoc-Documented Code**
+
+```typescript
+/**
+ * @class CustomToggle
+ * Accessible toggle button with state-based labels.
+ * 
+ * @param {string} onLabel - Label when toggle is on.
+ * @param {string} offLabel - Label when toggle is off.
+ * @returns {HTMLButtonElement} - Toggle button element.
+ * 
+ * @example
+ * const toggle = new CustomToggle("Mute", "Unmute");
+ * document.body.append(toggle.element);
+ * 
+ * @remarks
+ * - Accessibility: Auto-sets aria-pressed, role="switch"
+ * - Keyboard: Supports Enter/Space activation
+ * - Performance: <1ms state updates
+ */
+class CustomToggle {
+  element: HTMLButtonElement;
+  private state: boolean = false;
+  
+  constructor(private onLabel: string, private offLabel: string) {
+    this.element = document.createElement('button');
+    this.element.setAttribute('role', 'switch');
+    this.element.addEventListener('click', () => this.toggle());
+    this.updateLabel();
+  }
+  
+  private toggle(): void {
+    this.state = !this.state;
+    this.updateLabel();
+  }
+  
+  private updateLabel(): void {
+    this.element.textContent = this.state ? this.onLabel : this.offLabel;
+    this.element.setAttribute('aria-pressed', String(this.state));
+  }
+}
+```
+
+**Step 2: Generate Documentation**
+
+```bash
+npm run docs:generate
+```
+
+TypeDoc creates `docs/generated/classes/CustomToggle.md` automatically.
+
+**Step 3: Use the Component**
+
+```typescript
+const muteToggle = new CustomToggle("Mute", "Unmute");
+document.getElementById('controls')?.append(muteToggle.element);
+```
+
+### API Design Principles
+
+All components follow these principles:
+
+1. **Accessibility First**: ARIA attributes, semantic HTML, keyboard support
+2. **Performance**: GPU-accelerated animations, minimal reflows, <1ms operations
+3. **Type Safety**: Full TypeScript types, no `any`
+4. **Documentation**: Complete TsDoc on all public members
+5. **Vanilla**: No framework dependencies, pure DOM APIs
+
+### Advanced Topics
+
+For extending the application:
+- **State Management**: See how `App` class manages click counter state
+- **Event Handling**: Native event listeners, no event libraries
+- **DOM Manipulation**: `createElement`, `querySelector`, native APIs only
+- **Cross-Platform**: Environment detection for conditional features
+
+## Generated API Documentation
+
+Complete technical reference auto-generated from code:
+
+**[→ View Full API Reference](generated/README.md)**
+
+Includes:
+- Complete class documentation
+- Method signatures with types
+- Parameter descriptions
+- Return value documentation
+- Usage examples
+- Accessibility and performance notes
+
+## Next Steps
+
+- **Users**: Return to [UserGuide](UserGuide.md) or [Features](Features.md)
+- **Developers**: See [DeveloperGuide](DeveloperGuide.md) for build instructions
+- **Contributors**: Read [Contributing](Contributing.md) for guidelines
 
 ---
 
-## Adding to This API
-
-When you create new classes/functions:
-
-1. Write TsDoc comments (see [CODE_GUIDELINES.md](../CODE_GUIDELINES.md))
-2. Run `npm run docs:validate` to ensure compliance
-3. Update this file (manually or via TypeDoc)
-4. Commit both code and `API.md` together
-
-Keep it lean. Every public member should justify its existence. If it's complex, explain why in `@remarks`. If it's simple, be brief—clarity over verbosity.
-
-API is a contract. Make it trustworthy, like Polaroid truth—no deception, just what it does.
+**Note**: Documentation auto-updates when you run `npm run docs:generate`. Always run this after modifying TsDoc comments in code.

@@ -6,6 +6,9 @@ package-lock.json
 dist/
 electron-dist/
 
+# Generated documentation
+docs/generated/
+
 # Capacitor
 android/
 ios/
