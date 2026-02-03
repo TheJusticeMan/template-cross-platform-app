@@ -12,7 +12,7 @@ jobs:
       contents: write
       pages: write
       id-token: write
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -58,7 +58,7 @@ jobs:
       - name: Initialize Capacitor Android
         run: |
           npm run cap:sync
-          
+
       - name: Build Android APK
         run: |
           cd android

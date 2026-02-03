@@ -35,6 +35,7 @@
 ### 1. Source Layer (`src/`)
 
 #### index.ts
+
 - **Purpose**: Main application logic
 - **Pattern**: Class-based with TsDoc
 - **Responsibilities**:
@@ -44,6 +45,7 @@
   - Environment detection
 
 #### index.html
+
 - **Purpose**: HTML structure
 - **Pattern**: Semantic HTML5
 - **Features**:
@@ -52,6 +54,7 @@
   - Links to compiled JS/CSS
 
 #### index.css
+
 - **Purpose**: Styling
 - **Pattern**: Vanilla CSS3
 - **Features**:
@@ -62,6 +65,7 @@
 ### 2. Build System (`scripts/`)
 
 #### dev.js
+
 - **Purpose**: Development server
 - **Features**:
   - ESBuild watch mode
@@ -70,6 +74,7 @@
   - Live server on port 3000
 
 #### build.js
+
 - **Purpose**: Production build
 - **Features**:
   - TypeScript compilation
@@ -78,6 +83,7 @@
   - Recursive docs copy to dist/
 
 #### release.sh
+
 - **Purpose**: Release automation
 - **Steps**:
   1. Run linting
@@ -90,6 +96,7 @@
 ### 3. Documentation System
 
 #### TypeDoc Pipeline
+
 ```
 src/index.ts (TsDoc comments)
         ↓
@@ -103,13 +110,15 @@ Copy to dist/docs/ (offline access)
 ```
 
 #### Documentation Structure
-- **User-facing**: docs/*.md (guides, features, troubleshooting)
-- **Generated**: docs/generated/*.md (API reference)
+
+- **User-facing**: docs/\*.md (guides, features, troubleshooting)
+- **Generated**: docs/generated/\*.md (API reference)
 - **Standards**: CODE_GUIDELINES.md (coding rules)
 
 ### 4. Quality Gates
 
 #### Pre-commit (Husky)
+
 ```
 git commit
     ↓
@@ -124,6 +133,7 @@ npm run docs:validate (TypeDoc dry-run)
 ```
 
 #### Continuous Integration
+
 ```
 git push tag v*
     ↓
@@ -141,17 +151,20 @@ git push tag v*
 ### 5. Platform Targets
 
 #### Web Browser
+
 - **Output**: dist/index.html, dist/index.js, dist/index.css
 - **Size**: ~1KB minified JS
 - **Deployment**: Static hosting (GitHub Pages, Netlify, etc.)
 
 #### Electron Desktop
+
 - **Entry**: electron/main.js
 - **Loads**: dist/ content
 - **Output**: Platform-specific installers
 - **Platforms**: Windows (.exe), macOS (.dmg), Linux (.AppImage)
 
 #### Capacitor Mobile
+
 - **Platform**: android/, ios/ (generated)
 - **WebView**: Loads dist/ content
 - **Output**: Native APK/IPA
@@ -160,6 +173,7 @@ git push tag v*
 ## Data Flow
 
 ### Application Initialization
+
 ```
 1. Browser loads index.html
 2. HTML loads index.js and index.css
@@ -173,6 +187,7 @@ git push tag v*
 ```
 
 ### Build Flow
+
 ```
 Source (src/)
     ↓
@@ -192,6 +207,7 @@ Output to dist/
 ```
 
 ### Documentation Flow
+
 ```
 Write code with TsDoc
     ↓
@@ -211,18 +227,21 @@ Docs available offline in app
 ## Technology Stack
 
 ### Core Technologies
+
 - **TypeScript 5.3+**: Type-safe development
 - **ESBuild**: Fast bundling (<10ms)
 - **ESLint 9**: Code quality + jsdoc plugin
 - **TypeDoc**: API documentation generator
 
 ### Platform Technologies
+
 - **Electron 28**: Desktop wrapper
 - **Capacitor 6**: Mobile wrapper
 - **Husky 9**: Git hooks
 - **electron-builder**: Desktop packaging
 
 ### Development Tools
+
 - **serve**: Local HTTP server for docs
 - **gh-pages**: GitHub Pages deployment
 - **typescript-eslint**: TypeScript linting
@@ -230,30 +249,37 @@ Docs available offline in app
 ## Design Patterns
 
 ### 1. Class-Based Components
+
 ```typescript
 class Component {
   element: HTMLElement;
   private state: State;
-  
+
   constructor(config: Config) {
     this.element = document.createElement('div');
     this.state = this.initState(config);
     this.render();
     this.attachListeners();
   }
-  
-  private render(): void { /* ... */ }
-  private attachListeners(): void { /* ... */ }
+
+  private render(): void {
+    /* ... */
+  }
+  private attachListeners(): void {
+    /* ... */
+  }
 }
 ```
 
 ### 2. Event-Driven Architecture
+
 - Native event listeners
 - Event delegation where appropriate
 - Keyboard event handlers alongside click
 - No custom event system
 
 ### 3. Direct DOM Manipulation
+
 ```typescript
 // Create
 const element = document.createElement('button');
@@ -271,6 +297,7 @@ element.remove();
 ```
 
 ### 4. State Management
+
 - Class private properties
 - Direct state updates
 - No state library (Redux, MobX, etc.)
@@ -333,27 +360,32 @@ element.remove();
 ## Configuration Files
 
 ### tsconfig.json
+
 - **Strict mode**: Enabled
 - **Target**: ES2020
 - **Module**: ES2020
 - **Module resolution**: Node
 
 ### eslint.config.js
+
 - **Parser**: typescript-eslint
 - **Plugins**: jsdoc
 - **Rules**: Enforces TsDoc completeness
 
 ### typedoc.json
+
 - **Output**: docs/generated/
 - **Format**: Markdown
 - **Plugin**: typedoc-plugin-markdown
 
 ### electron-builder.json
+
 - **Output**: electron-dist/
 - **Targets**: dmg, exe, AppImage
 - **Files**: dist/, electron/main.js
 
 ### capacitor.config.json
+
 - **App ID**: com.template.crossplatform
 - **Web dir**: dist/
 - **Platforms**: android, ios
@@ -361,17 +393,20 @@ element.remove();
 ## Performance Characteristics
 
 ### Build Performance
+
 - **Development**: <5ms rebuild (hot reload)
 - **Production**: <10ms full build
 - **Documentation**: <2s TypeDoc generation
 
 ### Runtime Performance
+
 - **Bundle size**: 1KB minified JS
 - **Load time**: <50ms (local)
 - **UI operations**: <1ms
 - **Memory**: <5MB baseline
 
 ### Optimization Strategies
+
 1. **No frameworks**: Reduces bundle size by 100KB+
 2. **Tree shaking**: ESBuild removes unused code
 3. **Minification**: Production code compressed
@@ -381,16 +416,19 @@ element.remove();
 ## Security Considerations
 
 ### Content Security Policy
+
 - Default-src 'self'
 - No inline scripts in production
 - External sourcemaps for debugging
 
 ### Dependencies
+
 - Minimal dependencies (dev only)
 - Regular audits via npm audit
 - No runtime dependencies
 
 ### Input Validation
+
 - Sanitize user input
 - Use textContent (not innerHTML)
 - Validate DOM queries
@@ -398,6 +436,7 @@ element.remove();
 ## Extensibility Points
 
 ### Adding Features
+
 1. Create new class in src/
 2. Add complete TsDoc
 3. Use native APIs
@@ -405,6 +444,7 @@ element.remove();
 5. Update guides
 
 ### Platform-Specific Code
+
 ```typescript
 const isElectron = navigator.userAgent.includes('electron');
 const isCapacitor = !!(window as any).Capacitor;
@@ -419,6 +459,7 @@ if (isElectron) {
 ```
 
 ### Plugin System
+
 - No formal plugin system
 - Extend via TypeScript classes
 - Document with TsDoc
@@ -427,6 +468,7 @@ if (isElectron) {
 ## Testing Strategy
 
 ### Current Approach
+
 - Manual testing in browser
 - Manual testing in Electron
 - Manual testing on mobile
@@ -434,6 +476,7 @@ if (isElectron) {
 - Screen reader testing
 
 ### Quality Assurance
+
 - Pre-commit linting
 - Documentation validation
 - Type checking
@@ -441,6 +484,7 @@ if (isElectron) {
 - Cross-platform testing
 
 ### Future Considerations
+
 - Unit tests (Jest or Vitest)
 - E2E tests (Playwright)
 - Visual regression tests
@@ -449,6 +493,7 @@ if (isElectron) {
 ## Deployment Architecture
 
 ### GitHub Pages
+
 ```
 dist/ → GitHub Pages → https://user.github.io/repo/
   ├── index.html
@@ -458,6 +503,7 @@ dist/ → GitHub Pages → https://user.github.io/repo/
 ```
 
 ### Electron Distribution
+
 ```
 electron-dist/
   ├── win/     → Windows installer
@@ -466,6 +512,7 @@ electron-dist/
 ```
 
 ### Capacitor Apps
+
 ```
 Android: android/app/build/outputs/apk/
 iOS: ios/App/build/

@@ -39,8 +39,9 @@ When asking AI for help, include:
 5. **Documentation**: What docs need updating
 
 Example:
+
 ```
-I need to add a [component/feature]. 
+I need to add a [component/feature].
 
 Requirements:
 - Use vanilla TypeScript (no frameworks)

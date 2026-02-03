@@ -12,6 +12,7 @@ This document establishes coding standards, documentation requirements, and best
 ### 1. Vanilla Purity
 
 **No frameworks or unnecessary dependencies.** Use native browser APIs:
+
 - DOM: `querySelector`, `addEventListener`, `createElement`
 - TypeScript: Strict types, ES2020+ features
 - ESBuild: Fast, minimal configuration
@@ -26,16 +27,24 @@ Use TypeScript's strict mode. Catch errors at compile-time:
 
 ```typescript
 // Good: Explicit types
-interface ComponentState { active: boolean; label: string; }
-function updateComponent(state: ComponentState): void { /* ... */ }
+interface ComponentState {
+  active: boolean;
+  label: string;
+}
+function updateComponent(state: ComponentState): void {
+  /* ... */
+}
 
 // Avoid: Any types surrender type safety
-function updateComponent(state: any): void { /* ... */ }
+function updateComponent(state: any): void {
+  /* ... */
+}
 ```
 
 ### 3. Accessibility as Default
 
 **All UI must be accessible.** This is non-negotiable:
+
 - Use semantic HTML (`<button>`, `<nav>`, `<main>`)
 - Include ARIA attributes where needed (`aria-pressed`, `role="switch"`)
 - Support keyboard navigation (Tab, Enter/Space)
@@ -51,14 +60,14 @@ function updateComponent(state: any): void { /* ... */ }
 /**
  * @class ComponentName
  * Brief description of purpose and behavior.
- * 
+ *
  * @param {Type} paramName - Parameter description with constraints.
  * @returns {ReturnType} - Return value description.
- * 
+ *
  * @example
  * const component = new ComponentName(arg);
  * component.method();
- * 
+ *
  * @remarks
  * - Accessibility: ARIA support details
  * - Performance: Benchmark information (<1ms expected)
@@ -163,6 +172,7 @@ When adding features:
 TypeDoc auto-generates API documentation from TsDoc comments:
 
 **Workflow**:
+
 1. Write complete TsDoc in source files
 2. Run `npm run docs:generate`
 3. TypeDoc creates markdown in `docs/generated/`
@@ -173,12 +183,14 @@ TypeDoc auto-generates API documentation from TsDoc comments:
 ### Agent Guidelines for Documentation
 
 **When generating code**:
+
 - Ensure TsDoc is complete before suggesting implementation
 - Include `@remarks` for accessibility, performance, edge cases
 - Provide realistic `@example` blocks
 - Update version number when changing behavior
 
 **When updating docs**:
+
 - Run `docs:generate` after code changes
 - Update user guides if feature behavior changes
 - Link generated API docs in appropriate guides
@@ -191,9 +203,10 @@ TypeDoc auto-generates API documentation from TsDoc comments:
 ### Pre-Commit
 
 Husky runs these checks automatically:
+
 ```bash
-npm run lint           # ESLint + TsDoc validation
-npm run docs:validate  # TsDoc completeness + TypeDoc dry-run
+npm run lint          # ESLint + TsDoc validation
+npm run docs:validate # TsDoc completeness + TypeDoc dry-run
 ```
 
 Fix errors before committing.
@@ -201,19 +214,22 @@ Fix errors before committing.
 ### Pre-Push
 
 Before pushing to remote:
+
 ```bash
-npm run build          # Verify production build succeeds
-npm run electron:dev   # Smoke test desktop app
+npm run build        # Verify production build succeeds
+npm run electron:dev # Smoke test desktop app
 ```
 
 ### Release Process
 
 Use tagged releases:
+
 ```bash
 npm run release v1.2.3
 ```
 
 This workflow:
+
 1. Runs linting and validation
 2. Generates documentation
 3. Builds production bundle
@@ -221,6 +237,7 @@ This workflow:
 5. Triggers GitHub Actions for deployment
 
 **GitHub Actions** then:
+
 - Deploys to GitHub Pages
 - Builds Electron packages
 - Generates Capacitor APK
@@ -233,6 +250,7 @@ This workflow:
 ### Bundle Size
 
 Keep total bundle under 80KB:
+
 - Main JS: ~1KB minified
 - With sourcemaps: ~7KB
 - Documentation: ~30KB
@@ -248,6 +266,7 @@ Keep total bundle under 80KB:
 ### Cross-Platform Testing
 
 Test on all targets:
+
 - **Browser**: Chrome, Firefox, Safari, Edge
 - **Electron**: Windows, macOS, Linux
 - **Capacitor**: Android, iOS
@@ -255,6 +274,7 @@ Test on all targets:
 ### Documentation Structure
 
 **User-facing** (in `/docs`):
+
 - `index.md` - Navigation hub
 - `UserGuide.md` - App usage
 - `Features.md` - Feature walkthroughs
@@ -265,6 +285,7 @@ Test on all targets:
 - `Changelog.md` - Version history
 
 **Generated** (in `/docs/generated`):
+
 - Auto-created from TsDoc
 - Per-class/function markdown
 - Linked from API.md
@@ -274,6 +295,7 @@ Test on all targets:
 ## Summary Checklist
 
 Before contributing:
+
 - [ ] Read this file fully
 - [ ] Understand vanilla purity principle
 - [ ] Apply TsDoc template to all public members

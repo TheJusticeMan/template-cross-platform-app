@@ -14,14 +14,8 @@ if (!fs.existsSync(distDir)) {
 
 // Copy HTML and CSS files to dist
 const srcDir = path.join(__dirname, '..', 'src');
-fs.copyFileSync(
-  path.join(srcDir, 'index.html'),
-  path.join(distDir, 'index.html')
-);
-fs.copyFileSync(
-  path.join(srcDir, 'index.css'),
-  path.join(distDir, 'index.css')
-);
+fs.copyFileSync(path.join(srcDir, 'index.html'), path.join(distDir, 'index.html'));
+fs.copyFileSync(path.join(srcDir, 'index.css'), path.join(distDir, 'index.css'));
 // Copy .nojekyll for GitHub Pages
 const nojekyllPath = path.join(srcDir, '.nojekyll');
 if (fs.existsSync(nojekyllPath)) {
@@ -34,17 +28,17 @@ const distDocsDir = path.join(distDir, 'docs');
 
 function copyDirRecursive(src, dest) {
   if (!fs.existsSync(src)) return;
-  
+
   if (!fs.existsSync(dest)) {
     fs.mkdirSync(dest, { recursive: true });
   }
-  
+
   const entries = fs.readdirSync(src, { withFileTypes: true });
-  
+
   for (const entry of entries) {
     const srcPath = path.join(src, entry.name);
     const destPath = path.join(dest, entry.name);
-    
+
     if (entry.isDirectory()) {
       copyDirRecursive(srcPath, destPath);
     } else {
@@ -54,7 +48,6 @@ function copyDirRecursive(src, dest) {
 }
 
 copyDirRecursive(docsDir, distDocsDir);
-
 
 // ESBuild configuration for production
 const buildOptions = {
@@ -71,9 +64,9 @@ const buildOptions = {
 async function build() {
   try {
     console.log('🏗️  Building for production...\n');
-    
+
     await esbuild.build(buildOptions);
-    
+
     console.log('✅ Build completed successfully!\n');
     console.log(`📦 Output: ${distDir}\n`);
     console.log(`📚 Docs copied to: ${distDocsDir}\n`);

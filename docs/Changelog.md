@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-02-03
 
 ### Added
+
 - Initial release of cross-platform TypeScript application template
 - ESBuild for development (hot reload, inline sourcemaps) and production (minify, external maps)
 - ESLint with TypeScript and TsDoc enforcement via eslint-plugin-jsdoc
@@ -23,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bundle size: 1KB minified JS, <80KB total with documentation
 
 ### Technical
+
 - TypeScript 5.3+ with strict mode
 - ES2020 target for modern browser support
 - Pure vanilla TypeScript/JavaScript (no frameworks)
@@ -33,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Version History
 
 ### Unreleased
+
 - Check [GitHub milestones](https://github.com/TheJusticeMan/template-cross-platform-app/milestones) for upcoming features
 
 ### How to Read This Changelog

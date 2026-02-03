@@ -11,14 +11,17 @@ This application provides a foundation for creating cross-platform user interfac
 ### Launching the Application
 
 **In a Browser:**
+
 1. Open `dist/index.html` in any modern browser
 2. The interface loads instantly—no server required
 
 **As Desktop App (Electron):**
+
 1. Run the installer for your platform (`.dmg` for Mac, `.exe` for Windows, `.AppImage` for Linux)
 2. Application appears in your Applications folder or Start Menu
 
 **On Mobile (Capacitor):**
+
 1. Install the APK (Android) or IPA (iOS) on your device
 2. Launch from your app drawer
 
@@ -40,6 +43,7 @@ The application demonstrates fundamental GUI patterns:
 ### Keyboard Navigation
 
 All interactive elements support keyboard access:
+
 - **Tab**: Move between elements
 - **Enter/Space**: Activate buttons
 - **Escape**: Close modals (when implemented)
@@ -47,6 +51,7 @@ All interactive elements support keyboard access:
 ## Power User Features
 
 For advanced customization, see:
+
 - **[API Documentation](API.md)** - Customize behavior programmatically
 - **[Features Guide](Features.md)** - Detailed feature walkthrough
 

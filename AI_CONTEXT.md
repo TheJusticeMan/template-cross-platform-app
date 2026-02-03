@@ -9,36 +9,44 @@ This is a **vanilla TypeScript template** for building cross-platform applicatio
 ## Project Philosophy
 
 ### Vanilla Purity
+
 We reject frameworks. Native browser APIs are stable, performant, and future-proof. React, Vue, Angular add bloat and complexity. Standards endure; frameworks drift.
 
 ### Type Safety
+
 TypeScript strict mode catches errors at compile time. Never use `any`. Explicit types everywhere.
 
 ### Accessibility First
+
 Every UI element must be accessible. Semantic HTML, ARIA attributes, keyboard navigation—non-negotiable.
 
 ### Documentation as Contract
+
 TsDoc on all public members. Linting enforces this. Code changes; documentation explains why.
 
 ## Architecture
 
 ### Build System
+
 - **Bundler**: ESBuild (4ms builds!)
 - **Dev Mode**: Hot reload, inline sourcemaps
 - **Prod Mode**: Minification, external sourcemaps
 
 ### Type System
+
 - **Language**: TypeScript 5.3+
 - **Mode**: Strict
 - **Target**: ES2020
 - **Module**: ES Modules
 
 ### Documentation
+
 - **Source**: TsDoc comments in code
 - **Generator**: TypeDoc → Markdown
 - **Validation**: ESLint plugin enforces completeness
 
 ### Platforms
+
 - **Web**: Static bundle (1KB JS minified)
 - **Desktop**: Electron 28 (Windows, Mac, Linux)
 - **Mobile**: Capacitor 6 (Android, iOS)
@@ -46,16 +54,19 @@ TsDoc on all public members. Linting enforces this. Code changes; documentation 
 ## Key Files
 
 ### Source Code
+
 - `src/index.ts` - Main application logic
 - `src/index.html` - HTML template
 - `src/index.css` - Styles
 
 ### Build Scripts
+
 - `scripts/dev.js` - Development server (hot reload)
 - `scripts/build.js` - Production build (minified)
 - `scripts/release.sh` - Release automation
 
 ### Configuration
+
 - `tsconfig.json` - TypeScript strict mode
 - `eslint.config.js` - ESLint + jsdoc plugin
 - `typedoc.json` - API doc generation
@@ -63,6 +74,7 @@ TsDoc on all public members. Linting enforces this. Code changes; documentation 
 - `capacitor.config.json` - Mobile configuration
 
 ### Documentation
+
 - `docs/UserGuide.md` - End-user instructions
 - `docs/DeveloperGuide.md` - Developer reference
 - `docs/API.md` - API overview with links
@@ -81,18 +93,19 @@ TsDoc on all public members. Linting enforces this. Code changes; documentation 
 ## Code Patterns
 
 ### Component Creation
+
 ```typescript
 /**
  * @class ToggleButton
  * Accessible toggle with state management.
- * 
+ *
  * @param {string} label - Button label text.
  * @returns {HTMLButtonElement} - Toggle element.
- * 
+ *
  * @example
  * const toggle = new ToggleButton('Sound');
  * document.body.append(toggle.element);
- * 
+ *
  * @remarks
  * - Accessibility: role="switch", aria-pressed
  * - Keyboard: Space/Enter toggle state
@@ -101,7 +114,7 @@ TsDoc on all public members. Linting enforces this. Code changes; documentation 
 class ToggleButton {
   element: HTMLButtonElement;
   private state: boolean = false;
-  
+
   constructor(label: string) {
     this.element = document.createElement('button');
     this.element.setAttribute('type', 'button');
@@ -109,7 +122,7 @@ class ToggleButton {
     this.element.textContent = label;
     this.element.addEventListener('click', () => this.toggle());
   }
-  
+
   private toggle(): void {
     this.state = !this.state;
     this.element.setAttribute('aria-pressed', String(this.state));
@@ -118,7 +131,9 @@ class ToggleButton {
 ```
 
 ### DOM Manipulation
+
 Always use native APIs:
+
 ```typescript
 // Query elements
 const button = document.getElementById('myButton');
@@ -139,6 +154,7 @@ element.remove();
 ```
 
 ### Accessibility Pattern
+
 ```typescript
 // Semantic HTML
 const button = document.createElement('button');
@@ -160,21 +176,25 @@ button.addEventListener('keydown', (event) => {
 ## Quality Standards
 
 ### Bundle Size
+
 - **Target**: <100KB total (including docs)
 - **Current**: ~80KB (16KB code, 64KB docs)
 - **Code**: 1KB minified JavaScript
 
 ### Performance
+
 - **UI Operations**: <1ms
 - **Build Time**: <10ms (production)
 - **Hot Reload**: <5ms
 
 ### Documentation
+
 - **Coverage**: 100% on public members
 - **Enforcement**: ESLint fails without TsDoc
 - **Format**: TsDoc with examples and remarks
 
 ### Accessibility
+
 - **Semantic HTML**: Always
 - **ARIA**: Where needed
 - **Keyboard**: Full navigation support
@@ -183,6 +203,7 @@ button.addEventListener('keydown', (event) => {
 ## Common Tasks
 
 ### Adding a Feature
+
 1. Create class/function in `src/`
 2. Add complete TsDoc comments
 3. Use native DOM APIs only
@@ -192,6 +213,7 @@ button.addEventListener('keydown', (event) => {
 7. Test in browser and Electron
 
 ### Fixing a Bug
+
 1. Identify root cause (read error messages)
 2. Fix at source, not symptom
 3. Update TsDoc if behavior changes
@@ -200,6 +222,7 @@ button.addEventListener('keydown', (event) => {
 6. Update docs if needed
 
 ### Refactoring
+
 1. Preserve vanilla purity (no frameworks)
 2. Maintain/improve type safety
 3. Update all TsDoc comments
@@ -233,6 +256,7 @@ button.addEventListener('keydown', (event) => {
 ## Testing Strategy
 
 Currently manual testing:
+
 1. `npm run dev` - Test in browser
 2. `npm run electron:dev` - Test in Electron
 3. `npm run cap:build` - Test on mobile
@@ -243,16 +267,19 @@ Currently manual testing:
 ## Deployment
 
 ### Web
+
 - Build: `npm run build`
 - Output: `dist/` directory
 - Deploy: GitHub Pages or any static host
 
 ### Desktop (Electron)
+
 - Build: `npm run electron:build`
 - Output: `electron-dist/`
 - Packages: .exe (Windows), .dmg (Mac), .AppImage (Linux)
 
 ### Mobile (Capacitor)
+
 - Sync: `npm run cap:sync`
 - Android: Open in Android Studio
 - iOS: Open in Xcode
@@ -261,6 +288,7 @@ Currently manual testing:
 ## Pre-commit Hooks
 
 Husky automatically runs:
+
 1. `npm run lint` - ESLint validation
 2. `npm run docs:validate` - TsDoc completeness check
 
@@ -299,6 +327,7 @@ Both must pass to commit.
 ## Success Criteria
 
 Code is successful when:
+
 - ✅ Builds without errors
 - ✅ Linting passes
 - ✅ TsDoc is complete

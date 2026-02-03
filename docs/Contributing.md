@@ -42,6 +42,7 @@ Spot unclear docs or typos:
 ### Contribution Workflow
 
 **1. Fork & Clone**
+
 ```bash
 git clone https://github.com/your-username/template-cross-platform-app
 cd template-cross-platform-app
@@ -49,30 +50,35 @@ npm install
 ```
 
 **2. Create Branch**
+
 ```bash
 git checkout -b feature/your-feature-name
 ```
 
 **3. Make Changes**
+
 - Follow existing code style
 - Write TsDoc comments (mandatory)
 - Keep changes focused
 
 **4. Test Locally**
+
 ```bash
-npm run lint        # Check code quality
-npm run docs:validate  # Validate documentation
-npm run build       # Ensure builds successfully
-npm run dev         # Test in browser
+npm run lint          # Check code quality
+npm run docs:validate # Validate documentation
+npm run build         # Ensure builds successfully
+npm run dev           # Test in browser
 npm run electron:dev  # Test in Electron
 ```
 
 **5. Generate Documentation**
+
 ```bash
 npm run docs:generate
 ```
 
 **6. Commit**
+
 ```bash
 git add .
 git commit -m "Add feature: descriptive message"
@@ -81,11 +87,13 @@ git commit -m "Add feature: descriptive message"
 Pre-commit hooks will run lint and docs validation automatically.
 
 **7. Push & Pull Request**
+
 ```bash
 git push origin feature/your-feature-name
 ```
 
 Open pull request on GitHub with:
+
 - Clear description of changes
 - Why it's needed
 - Screenshots (if UI changes)
@@ -94,17 +102,18 @@ Open pull request on GitHub with:
 ### Code Standards
 
 **Mandatory TsDoc**:
+
 ```typescript
 /**
  * @class ComponentName
  * Brief description of purpose.
- * 
+ *
  * @param {Type} paramName - Parameter description.
  * @returns {ReturnType} - Return value description.
- * 
+ *
  * @example
  * const comp = new ComponentName(arg);
- * 
+ *
  * @remarks
  * - Accessibility: ARIA support details
  * - Performance: Benchmark info
@@ -112,12 +121,14 @@ Open pull request on GitHub with:
 ```
 
 **Vanilla Purity**:
+
 - No frameworks (React, Vue, Angular)
 - Native DOM APIs only
 - No jQuery or utility libraries
 - Justify any new dependencies
 
 **Accessibility First**:
+
 - Semantic HTML
 - ARIA attributes where needed
 - Keyboard navigation support
@@ -135,6 +146,7 @@ When code changes:
 ### Code Review Expectations
 
 Reviewers check:
+
 - ✓ TsDoc complete and accurate
 - ✓ Linting passes
 - ✓ No new dependencies (or justified)
@@ -145,17 +157,20 @@ Reviewers check:
 ### Development Guidelines
 
 **Keep it Minimal**:
+
 - Question every line of code
 - Remove unused code
 - Avoid over-abstraction
 - Clear > clever
 
 **Performance Matters**:
+
 - <1ms for UI operations
 - GPU-accelerated animations
 - Minimal DOM manipulation
 
 **Accessibility Non-Negotiable**:
+
 - Test with keyboard only
 - Use screen reader
 - Check DevTools Accessibility Inspector
@@ -164,7 +179,7 @@ Reviewers check:
 
 ```
 src/              # TypeScript source (document all exports)
-docs/             # User-facing documentation  
+docs/             # User-facing documentation
 docs/generated/   # Auto-generated API docs
 scripts/          # Build scripts
 electron/         # Electron main process

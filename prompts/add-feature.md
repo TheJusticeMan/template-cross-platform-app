@@ -76,7 +76,7 @@ As a user, I want to toggle between light and dark modes so that I can use the a
 - Type safety: no `any` types
 
 **Technical Details**:
-- Files to modify: 
+- Files to modify:
   - src/index.ts (add ThemeToggle class)
   - src/index.html (add toggle button)
   - src/index.css (add dark theme styles)
@@ -147,6 +147,7 @@ After receiving AI-generated code:
    - [ ] Screen reader friendly
 
 4. **Run Quality Checks**:
+
    ```bash
    npm run lint
    npm run docs:generate
@@ -174,10 +175,11 @@ After receiving AI-generated code:
 ## After Implementation
 
 1. Commit with clear message:
+
    ```bash
    git add .
    git commit -m "Add dark mode toggle feature
-
+   
    - Added ThemeToggle class with accessibility
    - Persists theme preference to localStorage
    - Updated documentation and examples

@@ -14,14 +14,8 @@ if (!fs.existsSync(distDir)) {
 
 // Copy HTML and CSS files to dist
 const srcDir = path.join(__dirname, '..', 'src');
-fs.copyFileSync(
-  path.join(srcDir, 'index.html'),
-  path.join(distDir, 'index.html')
-);
-fs.copyFileSync(
-  path.join(srcDir, 'index.css'),
-  path.join(distDir, 'index.css')
-);
+fs.copyFileSync(path.join(srcDir, 'index.html'), path.join(distDir, 'index.html'));
+fs.copyFileSync(path.join(srcDir, 'index.css'), path.join(distDir, 'index.css'));
 // Copy .nojekyll for GitHub Pages
 const nojekyllPath = path.join(srcDir, '.nojekyll');
 if (fs.existsSync(nojekyllPath)) {

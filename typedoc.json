@@ -5,12 +5,7 @@
   "plugin": ["typedoc-plugin-markdown"],
   "readme": "none",
   "includeVersion": true,
-  "exclude": [
-    "**/node_modules/**",
-    "**/dist/**",
-    "**/*.spec.ts",
-    "**/*.test.ts"
-  ],
+  "exclude": ["**/node_modules/**", "**/dist/**", "**/*.spec.ts", "**/*.test.ts"],
   "excludePrivate": false,
   "excludeProtected": false,
   "excludeExternals": true,

@@ -5,10 +5,7 @@
     "output": "electron-dist",
     "buildResources": "electron"
   },
-  "files": [
-    "dist/**/*",
-    "electron/main.js"
-  ],
+  "files": ["dist/**/*", "electron/main.js"],
   "mac": {
     "category": "public.app-category.utilities",
     "target": ["dmg", "zip"]

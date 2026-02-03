@@ -67,6 +67,7 @@ class App {
 ```
 
 **Key Methods:**
+
 - `init()`: Waits for DOM ready, then calls setup
 - `setup()`: Grabs DOM elements, attaches event handlers
 - `handleClick()`: Increments counter, updates UI
@@ -99,15 +100,15 @@ if (isElectron) {
 /**
  * @class CustomToggle
  * Accessible toggle button with state-based labels.
- * 
+ *
  * @param {string} onLabel - Label when toggle is on.
  * @param {string} offLabel - Label when toggle is off.
  * @returns {HTMLButtonElement} - Toggle button element.
- * 
+ *
  * @example
  * const toggle = new CustomToggle("Mute", "Unmute");
  * document.body.append(toggle.element);
- * 
+ *
  * @remarks
  * - Accessibility: Auto-sets aria-pressed, role="switch"
  * - Keyboard: Supports Enter/Space activation
@@ -116,19 +117,22 @@ if (isElectron) {
 class CustomToggle {
   element: HTMLButtonElement;
   private state: boolean = false;
-  
-  constructor(private onLabel: string, private offLabel: string) {
+
+  constructor(
+    private onLabel: string,
+    private offLabel: string
+  ) {
     this.element = document.createElement('button');
     this.element.setAttribute('role', 'switch');
     this.element.addEventListener('click', () => this.toggle());
     this.updateLabel();
   }
-  
+
   private toggle(): void {
     this.state = !this.state;
     this.updateLabel();
   }
-  
+
   private updateLabel(): void {
     this.element.textContent = this.state ? this.onLabel : this.offLabel;
     this.element.setAttribute('aria-pressed', String(this.state));
@@ -147,7 +151,7 @@ TypeDoc creates `docs/generated/classes/CustomToggle.md` automatically.
 **Step 3: Use the Component**
 
 ```typescript
-const muteToggle = new CustomToggle("Mute", "Unmute");
+const muteToggle = new CustomToggle('Mute', 'Unmute');
 document.getElementById('controls')?.append(muteToggle.element);
 ```
 
@@ -164,6 +168,7 @@ All components follow these principles:
 ### Advanced Topics
 
 For extending the application:
+
 - **State Management**: See how `App` class manages click counter state
 - **Event Handling**: Native event listeners, no event libraries
 - **DOM Manipulation**: `createElement`, `querySelector`, native APIs only
@@ -176,6 +181,7 @@ Complete technical reference auto-generated from code:
 **[→ View Full API Reference](generated/README.md)**
 
 Includes:
+
 - Complete class documentation
 - Method signatures with types
 - Parameter descriptions

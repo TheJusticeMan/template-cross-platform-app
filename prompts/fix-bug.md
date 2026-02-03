@@ -23,7 +23,9 @@ I'm experiencing a bug in [location/component].
 
 **Error Messages** (if any):
 ```
+
 [Paste error messages here]
+
 ```
 
 **Environment**:
@@ -70,7 +72,9 @@ Counter stays at 0 in Electron, but works fine in browser
 
 **Error Messages** (if any):
 ```
+
 No errors in console
+
 ```
 
 **Environment**:
@@ -133,12 +137,14 @@ Before asking for help, try:
 ## After Fix
 
 1. **Verify Fix**:
+
    ```bash
-   npm run dev      # Test in browser
-   npm run electron:dev  # Test in Electron
+   npm run dev          # Test in browser
+   npm run electron:dev # Test in Electron
    ```
 
 2. **Run Quality Checks**:
+
    ```bash
    npm run lint
    npm run build

@@ -9,11 +9,13 @@ Build interactive, accessible applications that run everywhere: web browsers, de
 ## 📚 Documentation
 
 **For Users** (using the application):
+
 - **[User Guide](docs/UserGuide.md)** - Get started with the application
 - **[Features](docs/Features.md)** - Explore capabilities
 - **[Troubleshooting](docs/Troubleshooting.md)** - Resolve issues
 
 **For Developers** (building and extending):
+
 - **[Developer Guide](docs/DeveloperGuide.md)** - Build, deploy, extend
 - **[API Reference](docs/API.md)** - Customize functionality
 - **[Contributing](docs/Contributing.md)** - Contribution guidelines
@@ -38,6 +40,7 @@ Download APK (Android) or IPA (iOS) from releases
 ### For Developers
 
 **1. Clone & Install:**
+
 ```bash
 git clone https://github.com/TheJusticeMan/template-cross-platform-app
 cd template-cross-platform-app
@@ -45,17 +48,21 @@ npm install
 ```
 
 **2. Start Development:**
+
 ```bash
 npm run dev
 ```
+
 Opens at `http://localhost:3000` with hot reload
 
 **3. Build for Production:**
+
 ```bash
 npm run build
 ```
 
 **4. Generate Documentation:**
+
 ```bash
 npm run docs:generate
 ```
@@ -67,12 +74,14 @@ See [Developer Guide](docs/DeveloperGuide.md) for complete instructions.
 ## ✨ Key Features
 
 ### For Users
+
 - **Accessible by Default**: Keyboard navigation, ARIA support, semantic HTML
 - **Cross-Platform**: Same experience on web, desktop, mobile
 - **Offline Documentation**: Help available in-app without internet
 - **No Unnecessary Complexity**: Straightforward, predictable interaction
 
 ### For Developers
+
 - **Lightning-Fast Builds**: <5ms development, <10ms production
 - **Hot Reload**: See changes instantly (<1ms)
 - **Auto-Generated Docs**: TypeDoc creates API docs from TsDoc comments
@@ -83,12 +92,13 @@ See [Developer Guide](docs/DeveloperGuide.md) for complete instructions.
 
 ## 🏗️ Technology Stack
 
-- **TypeScript 5.3+**: Strict mode, ES2020 target
+- **TypeScript 5.9+**: Strict mode, ES2020 target
 - **ESBuild**: Fast bundler and dev server
-- **Electron 28**: Desktop applications
-- **Capacitor 6**: Mobile applications (Android/iOS)
+- **Electron 40**: Desktop applications
+- **Capacitor 8**: Mobile applications (Android/iOS)
 - **TypeDoc**: Auto-generate documentation from code
 - **ESLint + TsDoc**: Enforced code quality and documentation
+- **Prettier**: Code formatting for consistency
 
 **Philosophy**: Pure vanilla TypeScript/JavaScript using native browser APIs. No React, Vue, Angular, or jQuery. Standards endure.
 
@@ -96,20 +106,22 @@ See [Developer Guide](docs/DeveloperGuide.md) for complete instructions.
 
 ## 📦 Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start development server with hot reload |
-| `npm run build` | Build production bundle |
-| `npm run docs:generate` | Generate API docs from TsDoc |
-| `npm run docs:validate` | Validate TsDoc completeness |
-| `npm run docs:serve` | Preview documentation locally (port 8001) |
-| `npm run lint` | Run ESLint with TsDoc validation |
-| `npm run lint:fix` | Auto-fix linting issues |
-| `npm run electron:dev` | Run in Electron |
-| `npm run electron:build` | Build Electron packages |
-| `npm run cap:build` | Build and sync for Capacitor |
-| `npm run web:deploy` | Deploy to GitHub Pages |
-| `npm run release` | Create tagged release |
+| Script                   | Description                               |
+| ------------------------ | ----------------------------------------- |
+| `npm run dev`            | Start development server with hot reload  |
+| `npm run build`          | Build production bundle                   |
+| `npm run format`         | Format all code with Prettier             |
+| `npm run format:check`   | Check if code is formatted                |
+| `npm run docs:generate`  | Generate API docs from TsDoc              |
+| `npm run docs:validate`  | Validate TsDoc completeness               |
+| `npm run docs:serve`     | Preview documentation locally (port 8001) |
+| `npm run lint`           | Run ESLint with TsDoc validation          |
+| `npm run lint:fix`       | Auto-fix linting issues                   |
+| `npm run electron:dev`   | Run in Electron                           |
+| `npm run electron:build` | Build Electron packages                   |
+| `npm run cap:build`      | Build and sync for Capacitor              |
+| `npm run web:deploy`     | Deploy to GitHub Pages                    |
+| `npm run release`        | Create tagged release                     |
 
 ---
 
@@ -153,13 +165,13 @@ template-cross-platform-app/
 /**
  * @class MyComponent
  * Brief description of purpose.
- * 
+ *
  * @param {string} label - Parameter description.
  * @returns {HTMLElement} - Return value description.
- * 
+ *
  * @example
  * const comp = new MyComponent("Hello");
- * 
+ *
  * @remarks
  * - Accessibility: ARIA support details
  * - Performance: <1ms operation
@@ -167,6 +179,7 @@ template-cross-platform-app/
 ```
 
 **Pre-commit hooks** enforce:
+
 - ESLint validation
 - TsDoc completeness
 - TypeDoc generation validation
@@ -180,11 +193,13 @@ See [CODE_GUIDELINES.md](CODE_GUIDELINES.md) for complete standards.
 ### Automated (Recommended)
 
 Tag a release to trigger GitHub Actions:
+
 ```bash
 npm run release v1.0.0
 ```
 
 **Deploys automatically**:
+
 - Web app to GitHub Pages
 - Electron packages for Windows/Mac/Linux
 - Capacitor APK for Android
@@ -193,9 +208,9 @@ npm run release v1.0.0
 ### Manual
 
 ```bash
-npm run web:deploy        # Deploy to GitHub Pages
-npm run electron:build    # Build desktop packages
-npm run cap:build         # Build mobile apps
+npm run web:deploy     # Deploy to GitHub Pages
+npm run electron:build # Build desktop packages
+npm run cap:build      # Build mobile apps
 ```
 
 See [Developer Guide](docs/DeveloperGuide.md) for detailed deployment instructions.
@@ -205,6 +220,7 @@ See [Developer Guide](docs/DeveloperGuide.md) for detailed deployment instructio
 ## 🤝 Contributing
 
 Contributions welcome! See [Contributing Guide](docs/Contributing.md) for:
+
 - Reporting bugs
 - Suggesting features
 - Code contribution workflow
@@ -219,7 +235,7 @@ Contributions welcome! See [Contributing Guide](docs/Contributing.md) for:
 This repository is optimized for AI coding assistants. Configuration files for:
 
 - **Cursor**: `.cursorrules` - Cursor AI rules
-- **Cline/Claude**: `.clinerules` - Claude Dev rules  
+- **Cline/Claude**: `.clinerules` - Claude Dev rules
 - **GitHub Copilot**: `.github/copilot-instructions.md`
 - **Aider**: `.aiderignore` - Ignore patterns
 
@@ -233,6 +249,7 @@ This repository is optimized for AI coding assistants. Configuration files for:
 ### Using AI Assistants
 
 When asking AI for help:
+
 1. Reference `CODE_GUIDELINES.md` for standards
 2. Emphasize vanilla purity (no frameworks)
 3. Require complete TsDoc documentation
