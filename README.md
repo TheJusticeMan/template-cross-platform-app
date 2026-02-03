@@ -214,6 +214,35 @@ Contributions welcome! See [Contributing Guide](docs/Contributing.md) for:
 
 ---
 
+## 🤖 AI Agent Ready
+
+This repository is optimized for AI coding assistants. Configuration files for:
+
+- **Cursor**: `.cursorrules` - Cursor AI rules
+- **Cline/Claude**: `.clinerules` - Claude Dev rules  
+- **GitHub Copilot**: `.github/copilot-instructions.md`
+- **Aider**: `.aiderignore` - Ignore patterns
+
+### Key Resources for AI Agents
+
+- **[AI_CONTEXT.md](AI_CONTEXT.md)** - Quick project overview and patterns
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Detailed system design
+- **[CODE_GUIDELINES.md](CODE_GUIDELINES.md)** - Coding standards (must read)
+- **[prompts/](prompts/)** - Common task templates
+
+### Using AI Assistants
+
+When asking AI for help:
+1. Reference `CODE_GUIDELINES.md` for standards
+2. Emphasize vanilla purity (no frameworks)
+3. Require complete TsDoc documentation
+4. Ensure accessibility (ARIA, keyboard, semantic HTML)
+5. Use prompts from `prompts/` directory for common tasks
+
+See [AI_CONTEXT.md](AI_CONTEXT.md) for detailed guidance.
+
+---
+
 ## 📄 License
 
 MIT License - Use freely for any project.

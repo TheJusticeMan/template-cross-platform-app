@@ -1,0 +1,202 @@
+# Cline/Claude Dev Rules for Cross-Platform TypeScript App
+
+## Project Context
+
+Cross-platform TypeScript application template using vanilla JS/TS with no frameworks. Targets web, desktop (Electron), and mobile (Capacitor).
+
+## Tech Stack
+
+- **Language**: TypeScript 5.3+ (strict mode)
+- **Bundler**: ESBuild (dev & prod)
+- **Linting**: ESLint + eslint-plugin-jsdoc
+- **Desktop**: Electron 28
+- **Mobile**: Capacitor 6
+- **Docs**: TypeDoc (markdown output)
+
+## Core Philosophy
+
+**Vanilla Purity**: Reject frameworks. Use native browser APIs exclusively. Standards endure; frameworks drift.
+
+## Mandatory Practices
+
+### 1. Documentation
+Every public member MUST have TsDoc:
+- @class, @param, @returns, @example, @remarks
+- Include accessibility notes
+- Include performance considerations
+- Linting fails if incomplete
+
+### 2. Type Safety
+- Strict mode enabled
+- Never use `any`
+- Explicit types always
+
+### 3. Accessibility
+- Semantic HTML required
+- ARIA attributes where needed
+- Full keyboard navigation
+- Screen reader compatible
+
+### 4. Performance
+- Keep bundle <100KB total
+- <1ms for UI operations
+- GPU-accelerated animations
+- Minimal DOM manipulation
+
+## File Patterns
+
+### Source Code
+- `src/index.ts` - Main application entry
+- `src/index.html` - HTML template
+- `src/index.css` - Styles
+
+### Build & Scripts
+- `scripts/dev.js` - Development server
+- `scripts/build.js` - Production build
+- `scripts/release.sh` - Release automation
+
+### Documentation
+- `docs/UserGuide.md` - User-facing guide
+- `docs/DeveloperGuide.md` - Developer reference
+- `docs/API.md` - API overview
+- `docs/generated/` - Auto-generated from TsDoc
+
+### Configuration
+- `tsconfig.json` - TypeScript config
+- `eslint.config.js` - ESLint config
+- `typedoc.json` - Documentation config
+- `electron-builder.json` - Desktop build config
+- `capacitor.config.json` - Mobile config
+
+## Development Commands
+
+```bash
+npm run dev              # Start dev server (hot reload)
+npm run build            # Production build
+npm run lint             # Check code quality
+npm run lint:fix         # Auto-fix linting
+npm run docs:generate    # Generate API docs
+npm run docs:validate    # Validate TsDoc completeness
+npm run electron:dev     # Test in Electron
+npm run cap:build        # Build for Capacitor
+```
+
+## Code Patterns
+
+### Creating Components
+```typescript
+/**
+ * @class MyComponent
+ * Component description.
+ * 
+ * @param {string} label - Label text.
+ * @returns {HTMLElement} - Component element.
+ * 
+ * @example
+ * const comp = new MyComponent('Hello');
+ * 
+ * @remarks
+ * - Accessibility: Uses semantic button
+ * - Performance: <1ms render
+ */
+class MyComponent {
+  element: HTMLElement;
+  
+  constructor(label: string) {
+    this.element = document.createElement('button');
+    this.element.textContent = label;
+    this.element.setAttribute('type', 'button');
+  }
+}
+```
+
+### DOM Manipulation
+```typescript
+// Good: Native APIs
+const button = document.querySelector('#myButton');
+button?.addEventListener('click', handleClick);
+
+// Bad: Never use jQuery or similar
+// $('#myButton').click(handleClick);
+```
+
+### Event Handling
+```typescript
+// Good: Native event listeners
+element.addEventListener('click', (event) => {
+  event.preventDefault();
+  // Handle click
+});
+
+// Good: Keyboard accessibility
+element.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    // Handle activation
+  }
+});
+```
+
+## What to Avoid
+
+❌ Adding frameworks (React, Vue, Angular)
+❌ Adding utility libraries (jQuery, Lodash)
+❌ Using `any` type
+❌ Skipping documentation
+❌ Ignoring accessibility
+❌ Complex abstractions
+❌ Breaking vanilla purity
+
+## What to Embrace
+
+✅ Native DOM APIs
+✅ Strict TypeScript
+✅ Complete TsDoc
+✅ Semantic HTML
+✅ ARIA attributes
+✅ Keyboard navigation
+✅ Minimal code
+✅ Clear patterns
+
+## When Making Changes
+
+1. Read CODE_GUIDELINES.md first
+2. Check existing patterns in src/index.ts
+3. Add complete TsDoc
+4. Test accessibility (keyboard, screen reader)
+5. Run linting: `npm run lint`
+6. Generate docs: `npm run docs:generate`
+7. Build: `npm run build`
+8. Verify bundle size (<100KB)
+
+## Error Handling
+
+- Read error messages carefully
+- Check console output
+- Verify DOM structure
+- Check TypeScript types
+- Review TsDoc completeness
+- Run `npm run docs:validate`
+
+## Pre-commit Validation
+
+Husky automatically runs:
+- ESLint with TsDoc validation
+- TypeDoc dry-run
+
+Both must pass to commit.
+
+## Key References
+
+- CODE_GUIDELINES.md - Complete standards
+- docs/DeveloperGuide.md - Build instructions
+- docs/API.md - API overview
+- src/index.ts - Example implementation
+
+## Philosophy
+
+Code is communication. Every function, every variable, every comment should clarify intent. Vanilla purity isn't dogma—it's pragmatism. Native APIs are stable, performant, and future-proof.
+
+Accessibility isn't optional. It's foundational. Every user deserves equal access.
+
+Documentation isn't busywork. It's a contract. Code changes; documentation explains why.

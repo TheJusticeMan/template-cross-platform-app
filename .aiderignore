@@ -1,0 +1,44 @@
+# Aider Ignore Patterns
+
+# Build outputs
+dist/
+electron-dist/
+
+# Generated documentation
+docs/generated/
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Platform-specific
+android/
+ios/
+.capacitor/
+
+# Cache and temp files
+*.tsbuildinfo
+.eslintcache
+coverage/
+tmp/
+temp/
+*.tmp
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+
+# Editor
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Husky internals
+.husky/_
