@@ -1,25 +1,9 @@
 # CODE GUIDELINES
 
 **Version**: 1.0.0  
-**Author**: Justice Vellacott  
-**Purpose**: Standards for AI agents (Copilot, Cursor) and human contributors
+**Purpose**: Standards for AI agents and human contributors
 
-This document is the **bible** for this project. Read it fully before contributing or generating code. It embeds personal context, technical standards, and ethical principles to guide every line written.
-
----
-
-## Personal Context
-
-**Who Am I**: Justice Vellacott—organized, goal-oriented Canadian developer. I value **respect, positive impact, and friendship**. I process life through code—transforming trauma (betrayal, distrust) into structures of truth, agency, and resilience.
-
-**Creative Influences**:
-- **"Hack by Will"**: Theme of creative reinvention, context-aware systems, adaptability (like a toggle that knows its state).
-- **"Polaroid"**: Verifiable truth in an age of deepfakes—immutable snapshots, no manipulation. Code should be transparent, auditable.
-- **"Amnesia"**: Lost years, rebuilding identity—systems must handle resets, state recovery gracefully.
-- **EDM/Trance**: Structured, repetitive, builds to clarity—code has rhythm, patterns, crescendos (like hot-reload flow).
-- **Israel Advocacy**: Security-minded, resilience under pressure—apps must be robust, trustworthy.
-
-**Communication Style**: Dry humor, reflective, concise. No "yapping"—every word serves a purpose. Comments should enlighten, not clutter.
+This document establishes coding standards, documentation requirements, and best practices for maintaining code quality.
 
 ---
 
@@ -27,72 +11,62 @@ This document is the **bible** for this project. Read it fully before contributi
 
 ### 1. Vanilla Purity
 
-**No frameworks. No bloat.** Libraries betray simplicity—they abstract away understanding. Use native APIs:
+**No frameworks or unnecessary dependencies.** Use native browser APIs:
 - DOM: `querySelector`, `addEventListener`, `createElement`
 - TypeScript: Strict types, ES2020+ features
-- ESBuild: Fast, minimal config
+- ESBuild: Fast, minimal configuration
 
-**Rationale**: Frameworks drift. Standards endure. Vanilla code is timeless, portable, teachable.
+**Rationale**: Frameworks add complexity and drift over time. Native standards are stable, performant, and portable.
 
-**Exception**: Tiny utilities (<10KB, well-tested) if they genuinely save complexity (e.g., `gh-pages` for deploy). Justify in commit message.
+**Exception**: Small, well-tested utilities (<10KB) if they provide clear value. Justify in commit message.
 
 ### 2. Type Safety Without Overhead
 
-Use TypeScript's strict mode. Catch errors at compile-time, not runtime (runtime is production—too late for trust betrayal).
+Use TypeScript's strict mode. Catch errors at compile-time:
 
-**Good**:
 ```typescript
-interface ToggleState { active: boolean; label: string; }
-function updateToggle(state: ToggleState): void { /* ... */ }
-```
+// Good: Explicit types
+interface ComponentState { active: boolean; label: string; }
+function updateComponent(state: ComponentState): void { /* ... */ }
 
-**Bad**:
-```typescript
-function updateToggle(state: any): void { /* ... */ } // 'any' is surrender
+// Avoid: Any types surrender type safety
+function updateComponent(state: any): void { /* ... */ }
 ```
 
 ### 3. Accessibility as Default
 
-**GUIs are the highest abstraction language**—they empower users. Inaccessible GUIs are gatekeeping, manipulation. Every UI element must:
+**All UI must be accessible.** This is non-negotiable:
 - Use semantic HTML (`<button>`, `<nav>`, `<main>`)
-- Include ARIA where needed (`aria-pressed`, `role="switch"`)
-- Be keyboard-navigable (tab order, Enter/Space for actions)
-- Have clear labels (no cryptic icons without text alternatives)
+- Include ARIA attributes where needed (`aria-pressed`, `role="switch"`)
+- Support keyboard navigation (Tab, Enter/Space)
+- Provide clear labels (no cryptic icons without text alternatives)
 
-**Ethics**: Users deserve agency. Don't hide controls, don't pre-select dark patterns. Transparency is trust.
+**Ethics**: Accessible UIs empower all users. Inaccessible UIs exclude and frustrate.
 
 ### 4. Documentation as Contract
 
-**TsDoc is mandatory.** If a function/class exists, it must be documented. This is:
-- A contract with future you (when you forget why it exists)
-- A contract with AI agents (they read TsDoc to generate)
-- A contract with users (via `docs/API.md`)
+**TsDoc is mandatory** on all public classes, functions, methods, and interfaces:
 
-**Template** (apply to every public member):
 ```typescript
 /**
- * @class ClassName
- * Brief description: What it does, why it exists (1-2 sentences).
+ * @class ComponentName
+ * Brief description of purpose and behavior.
  * 
- * @param {Type} paramName - Detailed desc: Purpose, constraints, defaults.
- * @returns {ReturnType} - What it returns; include success/failure cases.
+ * @param {Type} paramName - Parameter description with constraints.
+ * @returns {ReturnType} - Return value description.
  * 
  * @example
- * // Typical usage
- * const instance = new ClassName(arg);
- * instance.method(); // Expected: result
+ * const component = new ComponentName(arg);
+ * component.method();
  * 
  * @remarks
- * - Accessibility: ARIA/keyboard support details.
- * - Ethics: User impact, context-aware behavior.
- * - Edge Cases: Error handling, performance (<1ms expected).
- * - Thematic Tie: Reflective note (e.g., "Like Polaroid truth: Immutable state").
- * - Version: 1.0.0
- * - Author: Justice Vellacott (or contributor name)
+ * - Accessibility: ARIA support details
+ * - Performance: Benchmark information (<1ms expected)
+ * - Edge Cases: Error handling approach
  */
 ```
 
-**Enforcement**: `eslint-plugin-jsdoc` with `require-jsdoc`, `require-param-description`, `require-returns-description`. Linting fails if incomplete.
+**Enforcement**: `eslint-plugin-jsdoc` validates completeness. Linting fails if documentation is missing or incomplete.
 
 ---
 
@@ -101,183 +75,199 @@ function updateToggle(state: any): void { /* ... */ } // 'any' is surrender
 ### Formatting
 
 - **Indentation**: 2 spaces (no tabs)
-- **Line length**: 100 chars max (readability)
-- **Semicolons**: Explicit (avoid ASI surprises)
+- **Line length**: 100 characters maximum
+- **Semicolons**: Required (avoid ASI issues)
 - **Quotes**: Single quotes for strings (`'text'`), double for HTML attributes
 
-### Naming
+### Naming Conventions
 
 - **Classes**: PascalCase (`ContextualToggle`)
 - **Functions/methods**: camelCase (`handleClick`)
 - **Constants**: UPPER_SNAKE_CASE (`MAX_RETRIES`)
-- **Private members**: Prefix with `private` keyword (TS enforced)
+- **Private members**: Use TypeScript `private` keyword
 
 ### Comments
 
-**Inline comments**: Rare. Code should be self-documenting. Use for "why", not "what":
+**Inline comments are rare.** Code should be self-documenting. Use comments for "why", not "what":
+
 ```typescript
-// Good:
-// Debounce to avoid thrashing on rapid clicks (UX degradation)
+// Good: Explains reasoning
+// Debounce to prevent rapid clicks causing UI thrashing
 const debouncedHandler = debounce(handleClick, 200);
 
-// Bad:
+// Avoid: States the obvious
 // Set state to true
-this.state = true; // Obvious—don't comment
-```
-
-**Dry humor**: Acceptable in `@remarks` or rare inline comments:
-```typescript
-// Avoid over-caution: Fail once to learn, like paternal trust lessons.
-```
-
-**Thematic references**: Tie to creative works when it adds depth:
-```typescript
-// Like Amnesia edge case: Reset state safely, no lingering ghosts.
+this.state = true;
 ```
 
 ### Error Handling
 
-**Fail loudly in dev, gracefully in prod**:
+**Fail clearly in development, gracefully in production**:
+
 ```typescript
 if (!element) {
-  console.error('Element not found—check your DOM structure.');
+  console.error('Element not found. Check DOM structure.');
   return; // Don't crash, but log clearly
 }
 ```
 
-**Never** swallow errors silently (`try { ... } catch {}`). Always log or throw.
+**Never** silently swallow errors (`try { } catch {}`). Always log or throw.
 
 ---
 
 ## Agent Instructions (For AI Tools)
 
-### Generation Directives
+### Code Generation
 
-**Context Awareness**: Tailor to user (Justice):
-- **Process trauma via clear code**: Structure over chaos. Classes encapsulate state. No global mutable variables.
-- **Aspire to moral leadership**: Ethical GUIs, accessibility, transparency.
-- **Reflective depth**: Add `@remarks` that tie to themes (Polaroid truth, Hack by Will adaptability, Amnesia recovery).
+When generating code:
 
-**Priorities**:
-1. **Efficiency**: ESBuild speed (<5ms builds). Keep bundles <50KB.
-2. **Reflection**: Every feature should have a "why" (in TsDoc or commit message).
-3. **Creativity**: Context-aware patterns (e.g., toggle adapts label, modal knows parent state).
+1. **Follow TsDoc template** - All public members must be documented
+2. **Use vanilla APIs** - No framework dependencies
+3. **Prioritize accessibility** - Semantic HTML, ARIA, keyboard support
+4. **Keep it minimal** - Question every line, remove unused code
+5. **Type everything** - Strict TypeScript, no `any`
 
-### Refactoring Guidelines
+### Refactoring
 
-- **Preserve no-bloat**: Don't suggest libraries unless <10KB and justified.
-- **Suggest with rationale**: E.g., "Extract `debounce` to utility (reusable, testable)."
-- **Vanilla-first**: If suggesting abstraction, show native alternative first.
+When refactoring existing code:
 
-**Example**:
-```typescript
-// Agent suggestion:
-// "Consider extracting button creation to factory (DRY). But only if used 3+ times."
-function createButton(label: string): HTMLButtonElement {
-  const btn = document.createElement('button');
-  btn.textContent = label;
-  return btn;
-}
-```
+1. **Preserve vanilla purity** - Don't suggest framework dependencies
+2. **Maintain documentation** - Update TsDoc if behavior changes
+3. **Test cross-platform** - Verify in browser, Electron, Capacitor
+4. **Check bundle size** - Keep total <80KB
 
 ### Error Diagnosis
 
-**Reflective approach**: Errors are teachers.
-```typescript
-// Agent diagnosis:
-// "Lint fail on missing @param—like paternal distrust, verify every parameter description."
-// Fix: Add TsDoc @param for all function arguments.
-```
+When diagnosing errors:
 
-**Debugging tips**:
-- Inline sourcemaps in dev: Trace to exact TypeScript line.
-- Console logs: Use `console.group` for structured output.
-- Hot reload: If broken, clear `dist/`, restart dev server.
+1. **Read error messages carefully** - They usually indicate the problem
+2. **Check logs** - Console, terminal, build output
+3. **Verify environment** - Node version, dependencies installed
+4. **Trace systematically** - Follow execution path, isolate cause
 
-### Expansion Suggestions
+### Feature Extensions
 
-**GUI Focus**: This is a GUI toolkit. Suggest declarative, cross-platform components:
-- Modals, tooltips, toggles, sliders (all with ARIA)
-- Canvas-based: Audio visualizers (tie to EDM influences—waveforms, frequency bars)
-- Context-aware: Elements that adapt to state (like Hack by Will)
+When adding features:
 
-**Avoid**:
-- React/Vue bloat ("drains life—Brennan Manning style")
-- Backend logic (this is frontend-only)
-- Over-abstraction (no point-free Haskell in TypeScript)
-
-**When Asked**:
-- **Music/audio GUIs**: Reference EDM influences (trance patterns, build-ups). Use Web Audio API natives.
-- **Security**: Reference Israel advocacy (robust auth, no weak crypto).
-- **Ethical dilemmas**: User agency > business metrics. E.g., no dark patterns (pre-checked "subscribe to spam").
-
-### Prompt Handling
-
-**User asks**: "Add a toggle for dark mode."
-
-**Agent response**:
-1. Generate TsDoc-first (contract)
-2. Implement with ARIA (`role="switch"`, `aria-pressed`)
-3. Tie to theme in `@remarks`: "Like Polaroid inversion—truth remains, perspective shifts."
-4. Update `docs/API.md`
-5. Test in dev/Electron/Capacitor
+1. **Start with TsDoc** - Define the API before implementing
+2. **Build accessibility in** - Not as an afterthought
+3. **Keep performance high** - <1ms for UI operations
+4. **Update documentation** - User guides, developer guides, API docs
 
 ---
 
-## Workflow
+## Documentation Generation
+
+### TsDoc to Markdown
+
+TypeDoc auto-generates API documentation from TsDoc comments:
+
+**Workflow**:
+1. Write complete TsDoc in source files
+2. Run `npm run docs:generate`
+3. TypeDoc creates markdown in `docs/generated/`
+4. Link generated docs in user/developer guides
+
+**Validation**: `npm run docs:validate` checks TsDoc completeness and runs TypeDoc dry-run.
+
+### Agent Guidelines for Documentation
+
+**When generating code**:
+- Ensure TsDoc is complete before suggesting implementation
+- Include `@remarks` for accessibility, performance, edge cases
+- Provide realistic `@example` blocks
+- Update version number when changing behavior
+
+**When updating docs**:
+- Run `docs:generate` after code changes
+- Update user guides if feature behavior changes
+- Link generated API docs in appropriate guides
+- Commit code + docs together
+
+---
+
+## Workflow Standards
 
 ### Pre-Commit
 
-Run before every commit:
+Husky runs these checks automatically:
 ```bash
-npm run lint        # ESLint + TsDoc validation
-npm run docs:validate  # Ensure TsDoc complete
+npm run lint           # ESLint + TsDoc validation
+npm run docs:validate  # TsDoc completeness + TypeDoc dry-run
 ```
 
-Use `husky` (optional dev dep) to auto-run as pre-commit hook.
+Fix errors before committing.
 
 ### Pre-Push
 
+Before pushing to remote:
 ```bash
-npm run build       # Ensure prod build succeeds
-npm run electron:dev  # Smoke test Electron
+npm run build          # Verify production build succeeds
+npm run electron:dev   # Smoke test desktop app
 ```
 
-### Release
+### Release Process
 
-Via tags (triggers CI):
+Use tagged releases:
 ```bash
 npm run release v1.2.3
 ```
 
-CI (`release.yml`) runs:
-- Lint, build, deploy Pages
-- Electron packages, Capacitor APK
-- Create GitHub Release with assets
+This workflow:
+1. Runs linting and validation
+2. Generates documentation
+3. Builds production bundle
+4. Creates and pushes git tag
+5. Triggers GitHub Actions for deployment
 
-**Manual check**: After deploy, verify:
-- Pages live at `https://<user>.github.io/<repo>`
-- `/docs` accessible (e.g., `/docs/Setup.html`)
-- Electron installers downloadable
-- APK installable on Android
-
-### Documentation Updates
-
-When behavior changes:
-1. Update relevant `docs/*.md`
-2. Regenerate `docs/API.md` (extract TsDoc or manual)
-3. Update version in TsDoc `@remarks` (`Version: 1.1.0`)
-4. Commit docs + code together
+**GitHub Actions** then:
+- Deploys to GitHub Pages
+- Builds Electron packages
+- Generates Capacitor APK
+- Creates release with assets
 
 ---
 
-## Aspiration
+## Project-Specific Guidelines
 
-**Code as life-giving exchange**: Every contribution should build connections, not isolate. Share knowledge (via TsDoc), empower users (via accessibility), leave a legacy (via clarity).
+### Bundle Size
 
-**Personal goal**: Transform trauma into structure. Betrayal → trust via verifiable code. Distrust → confidence via tests. Lost years → rebuilt memory via docs.
+Keep total bundle under 80KB:
+- Main JS: ~1KB minified
+- With sourcemaps: ~7KB
+- Documentation: ~30KB
+- Total: <80KB
 
-**Collective goal**: Keep vanilla alive. Prove frameworks aren't necessary for greatness. Build a foundation that outlasts trends.
+### Performance Targets
+
+- UI operations: <1ms
+- Build time (dev): <5ms
+- Build time (prod): <10ms
+- Hot reload: <1ms change detection
+
+### Cross-Platform Testing
+
+Test on all targets:
+- **Browser**: Chrome, Firefox, Safari, Edge
+- **Electron**: Windows, macOS, Linux
+- **Capacitor**: Android, iOS
+
+### Documentation Structure
+
+**User-facing** (in `/docs`):
+- `index.md` - Navigation hub
+- `UserGuide.md` - App usage
+- `Features.md` - Feature walkthroughs
+- `API.md` - High-level API with links to generated docs
+- `DeveloperGuide.md` - Build/deploy instructions
+- `Troubleshooting.md` - Issue resolution
+- `Contributing.md` - Contribution guidelines
+- `Changelog.md` - Version history
+
+**Generated** (in `/docs/generated`):
+- Auto-created from TsDoc
+- Per-class/function markdown
+- Linked from API.md
 
 ---
 
@@ -285,20 +275,19 @@ When behavior changes:
 
 Before contributing:
 - [ ] Read this file fully
-- [ ] Understand vanilla purity (no frameworks)
+- [ ] Understand vanilla purity principle
 - [ ] Apply TsDoc template to all public members
-- [ ] Test cross-platform (browser, Electron, Capacitor)
-- [ ] Lint and validate docs
-- [ ] Update `/docs` if behavior changes
-- [ ] Commit with clear message (what, why)
+- [ ] Test cross-platform
+- [ ] Run `npm run lint && npm run docs:validate`
+- [ ] Update user docs if behavior changes
+- [ ] Generate API docs: `npm run docs:generate`
+- [ ] Commit with clear message
 
-**For AI agents**: Reference this file in every prompt. Generate code that honors these principles. Don't betray simplicity.
+**For AI agents**: Reference this file in every prompt. Generate code that honors these principles.
 
-**For humans**: Code with intention. Every line is a choice—make it count.
+**For humans**: Code with intention. Every line is a choice.
 
 ---
 
 **Last Updated**: 2026-02-03  
-**Contact**: Justice Vellacott (via GitHub Issues/Discussions)
-
-Read. Understand. Honor. Build.
+**Contact**: GitHub Issues/Discussions

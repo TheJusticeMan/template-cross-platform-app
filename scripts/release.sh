@@ -44,6 +44,10 @@ echo "Running lint and docs validation..."
 npm run lint
 npm run docs:validate
 
+# Generate documentation
+echo "Generating documentation..."
+npm run docs:generate
+
 # Build production
 echo "Building production..."
 npm run build

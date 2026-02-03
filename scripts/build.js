@@ -28,23 +28,33 @@ if (fs.existsSync(nojekyllPath)) {
   fs.copyFileSync(nojekyllPath, path.join(distDir, '.nojekyll'));
 }
 
-// Copy docs directory for offline access
+// Copy docs directory for offline access (recursively)
 const docsDir = path.join(__dirname, '..', 'docs');
 const distDocsDir = path.join(distDir, 'docs');
-if (fs.existsSync(docsDir)) {
-  if (!fs.existsSync(distDocsDir)) {
-    fs.mkdirSync(distDocsDir, { recursive: true });
+
+function copyDirRecursive(src, dest) {
+  if (!fs.existsSync(src)) return;
+  
+  if (!fs.existsSync(dest)) {
+    fs.mkdirSync(dest, { recursive: true });
   }
-  const docFiles = fs.readdirSync(docsDir);
-  docFiles.forEach(file => {
-    if (file.endsWith('.md')) {
-      fs.copyFileSync(
-        path.join(docsDir, file),
-        path.join(distDocsDir, file)
-      );
+  
+  const entries = fs.readdirSync(src, { withFileTypes: true });
+  
+  for (const entry of entries) {
+    const srcPath = path.join(src, entry.name);
+    const destPath = path.join(dest, entry.name);
+    
+    if (entry.isDirectory()) {
+      copyDirRecursive(srcPath, destPath);
+    } else {
+      fs.copyFileSync(srcPath, destPath);
     }
-  });
+  }
 }
+
+copyDirRecursive(docsDir, distDocsDir);
+
 
 // ESBuild configuration for production
 const buildOptions = {

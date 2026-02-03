@@ -1,323 +1,232 @@
-# Cross-Platform TypeScript Application Template
+# Cross-Platform TypeScript Application
 
-A comprehensive template for building cross-platform applications with TypeScript, ESBuild, Electron, and Capacitor. Deploy to web (GitHub Pages), desktop (Windows/Mac/Linux), and mobile (Android/iOS).
+Build interactive, accessible applications that run everywhere: web browsers, desktop (Electron), and mobile devices (Capacitor).
 
-> **📚 Full Documentation**: See [/docs](docs/) for comprehensive guides. Start with [Setup.md](docs/Setup.md).
->
-> **👨‍💻 AI/Human Contributors**: Read [CODE_GUIDELINES.md](CODE_GUIDELINES.md) before contributing.
+**Pure vanilla TypeScript/JavaScript—no frameworks, no bloat.**
 
-## 🚀 Features
+---
 
-- **TypeScript** - Type-safe development with strict mode
-- **ESBuild** - Lightning-fast builds (<5ms)
-  - Development: Watch mode, live reload, inline source maps
-  - Production: Minification, external source maps
-- **ESLint** - Code quality with **mandatory TsDoc** (enforced via eslint-plugin-jsdoc)
-- **Electron** - Desktop application support (Windows, Mac, Linux)
-- **Capacitor** - Mobile application support (Android, iOS)
-- **GitHub Pages** - Automated web deployment with `/docs` included
-- **GitHub Actions** - CI/CD pipeline with automatic releases
-- **Documentation** - Comprehensive `/docs` bundled with builds for offline access
+## 📚 Documentation
 
-## 📚 User Help
+**For Users** (using the application):
+- **[User Guide](docs/UserGuide.md)** - Get started with the application
+- **[Features](docs/Features.md)** - Explore capabilities
+- **[Troubleshooting](docs/Troubleshooting.md)** - Resolve issues
 
-All documentation is bundled with production builds (`dist/docs/`) and deployed to GitHub Pages:
+**For Developers** (building and extending):
+- **[Developer Guide](docs/DeveloperGuide.md)** - Build, deploy, extend
+- **[API Reference](docs/API.md)** - Customize functionality
+- **[Contributing](docs/Contributing.md)** - Contribution guidelines
 
-- **[Setup.md](docs/Setup.md)** - Quickstart guide with first GUI tweak example
-- **[Build.md](docs/Build.md)** - Platform-specific builds (web/desktop/mobile) and sourcemap debugging
-- **[Deploy.md](docs/Deploy.md)** - Release process, GitHub Pages, custom hosting
-- **[API.md](docs/API.md)** - Auto-scaffolded public API overview (from TsDoc)
-- **[Troubleshooting.md](docs/Troubleshooting.md)** - Common issues with reflective fixes
-- **[Contributing.md](docs/Contributing.md)** - How to extend without bloat
+**Quick Start**: [Documentation Hub](docs/index.md)
 
-**Preview docs locally**:
+---
+
+## 🚀 Quick Start
+
+### For Users
+
+**Run in Browser:**
+Open `dist/index.html` in any modern browser (Chrome, Firefox, Safari, Edge)
+
+**Install Desktop App:**
+Download installer for your platform from [Releases](https://github.com/TheJusticeMan/template-cross-platform-app/releases)
+
+**Install Mobile App:**
+Download APK (Android) or IPA (iOS) from releases
+
+### For Developers
+
+**1. Clone & Install:**
 ```bash
-npm run docs:serve
-# Opens at http://localhost:8001
+git clone https://github.com/TheJusticeMan/template-cross-platform-app
+cd template-cross-platform-app
+npm install
 ```
 
-## 📁 Project Structure
-
-```
-.
-├── src/                    # Source files
-│   ├── index.ts           # Main TypeScript application (TsDoc mandatory)
-│   ├── index.html         # HTML template
-│   └── index.css          # Styles
-├── docs/                  # User documentation (bundled to dist/docs/)
-│   ├── Setup.md
-│   ├── Build.md
-│   ├── Deploy.md
-│   ├── API.md
-│   ├── Troubleshooting.md
-│   └── Contributing.md
-├── dist/                  # Build output (generated)
-│   └── docs/              # Docs copied here for offline access
-├── electron/              # Electron-specific files
-│   └── main.js           # Electron main process
-├── scripts/               # Build scripts
-│   ├── dev.js            # Development server
-│   ├── build.js          # Production build (copies docs)
-│   └── release.sh        # Release automation
-├── .github/workflows/     # GitHub Actions
-│   └── release.yml       # Release workflow (deploys docs to Pages)
-├── CODE_GUIDELINES.md     # Agent & contributor standards
-├── package.json           # Dependencies and scripts
-├── tsconfig.json          # TypeScript configuration
-├── eslint.config.js       # ESLint with jsdoc rules
-├── capacitor.config.json  # Capacitor configuration
-└── electron-builder.json  # Electron Builder configuration
-```
-
-## 🛠️ Setup
-
-### Prerequisites
-
-- Node.js 20+ and npm
-- Git
-- For Android builds: Java 17+, Android SDK
-- For iOS builds (Mac only): Xcode
-
-### Installation
-
-1. **Clone or use this template:**
-   ```bash
-   git clone <repository-url>
-   cd template-cross-platform-app
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Initialize Capacitor (optional, for mobile):**
-   ```bash
-   npm run cap:init
-   ```
-
-## 🎯 Development
-
-### Web Development
-
-Start the development server with hot reload:
+**2. Start Development:**
 ```bash
 npm run dev
 ```
-Opens at `http://localhost:3000`
+Opens at `http://localhost:3000` with hot reload
 
-### Electron Development
-
-Run the app in Electron:
-```bash
-npm run electron:dev
-```
-
-### Mobile Development (Capacitor)
-
-1. Build and sync to mobile platforms:
-   ```bash
-   npm run cap:build
-   ```
-
-2. Open in Android Studio:
-   ```bash
-   npm run cap:open:android
-   ```
-
-3. Open in Xcode (Mac only):
-   ```bash
-   npx cap open ios
-   ```
-
-## 🏗️ Building
-
-### Production Web Build
-
-Build optimized production bundle:
+**3. Build for Production:**
 ```bash
 npm run build
 ```
 
-### Build Electron Desktop Apps
-
-Create desktop installers:
+**4. Generate Documentation:**
 ```bash
-npm run electron:build
+npm run docs:generate
 ```
 
-Outputs to `electron-dist/`:
-- Windows: `.exe`, `.nsis`
-- Mac: `.dmg`, `.zip`
-- Linux: `.AppImage`, `.deb`
+See [Developer Guide](docs/DeveloperGuide.md) for complete instructions.
 
-### Build Mobile Apps
+---
 
-Sync and build for mobile:
-```bash
-npm run cap:sync
-```
+## ✨ Key Features
 
-Then build in Android Studio or Xcode.
+### For Users
+- **Accessible by Default**: Keyboard navigation, ARIA support, semantic HTML
+- **Cross-Platform**: Same experience on web, desktop, mobile
+- **Offline Documentation**: Help available in-app without internet
+- **No Unnecessary Complexity**: Straightforward, predictable interaction
 
-## 🧹 Code Quality
+### For Developers
+- **Lightning-Fast Builds**: <5ms development, <10ms production
+- **Hot Reload**: See changes instantly (<1ms)
+- **Auto-Generated Docs**: TypeDoc creates API docs from TsDoc comments
+- **Strict Quality**: Enforced documentation, linting, pre-commit validation
+- **Bundle Size**: 1KB minified JS (your code), <80KB total with docs
 
-### Linting with TsDoc Enforcement
+---
 
-This template **requires TsDoc** (JSDoc-compatible) on all classes, functions, methods, and interfaces. Enforced via `eslint-plugin-jsdoc`.
+## 🏗️ Technology Stack
 
-Run ESLint:
-```bash
-npm run lint
-```
+- **TypeScript 5.3+**: Strict mode, ES2020 target
+- **ESBuild**: Fast bundler and dev server
+- **Electron 28**: Desktop applications
+- **Capacitor 6**: Mobile applications (Android/iOS)
+- **TypeDoc**: Auto-generate documentation from code
+- **ESLint + TsDoc**: Enforced code quality and documentation
 
-Fix linting issues automatically:
-```bash
-npm run lint:fix
-```
+**Philosophy**: Pure vanilla TypeScript/JavaScript using native browser APIs. No React, Vue, Angular, or jQuery. Standards endure.
 
-Validate documentation completeness:
-```bash
-npm run docs:validate
-```
-
-**TsDoc Template** (see [CODE_GUIDELINES.md](CODE_GUIDELINES.md) for full details):
-```typescript
-/**
- * @class ClassName
- * Brief description: What it does, why it exists.
- * 
- * @param {Type} paramName - Detailed description with constraints.
- * @returns {ReturnType} - What it returns, success/failure cases.
- * 
- * @example
- * // Usage example
- * const instance = new ClassName(arg);
- * 
- * @remarks
- * - Accessibility: ARIA/keyboard support.
- * - Ethics: User impact, transparency.
- * - Edge Cases: Error handling, performance.
- * - Thematic Tie: Reflective note (e.g., "Like Polaroid truth").
- * - Version: 1.0.0
- * - Author: Your Name
- */
-```
-
-Missing or incomplete TsDoc will **fail linting**. This ensures maintainability and API clarity.
-
-## 🚀 Deployment
-
-### Deploy to GitHub Pages
-
-Deploy manually:
-```bash
-npm run web:deploy
-```
-
-### Create a Release
-
-Automated release process (triggers on git tags):
-
-```bash
-npm run release v1.0.0
-```
-
-Or manually:
-```bash
-./scripts/release.sh v1.0.0
-```
-
-This will:
-1. Run linting
-2. Build production version
-3. Create and push a git tag
-4. Trigger GitHub Actions workflow
-
-The GitHub Actions workflow will:
-- Deploy web app to GitHub Pages
-- Build Electron packages for all platforms
-- Build Android APK
-- Create GitHub Release with all assets
-
-### Manual GitHub Actions Trigger
-
-Push a tag to trigger the release workflow:
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
+---
 
 ## 📦 Available Scripts
 
 | Script | Description |
 |--------|-------------|
 | `npm run dev` | Start development server with hot reload |
-| `npm run build` | Build production bundle (includes copying docs) |
-| `npm run lint` | Run ESLint with TsDoc validation |
-| `npm run lint:fix` | Fix ESLint issues automatically |
-| `npm run docs:build` | Build and copy docs to dist/docs |
+| `npm run build` | Build production bundle |
+| `npm run docs:generate` | Generate API docs from TsDoc |
 | `npm run docs:validate` | Validate TsDoc completeness |
-| `npm run docs:serve` | Preview docs locally (port 8001) |
-| `npm run electron:dev` | Run app in Electron |
+| `npm run docs:serve` | Preview documentation locally (port 8001) |
+| `npm run lint` | Run ESLint with TsDoc validation |
+| `npm run lint:fix` | Auto-fix linting issues |
+| `npm run electron:dev` | Run in Electron |
 | `npm run electron:build` | Build Electron packages |
-| `npm run cap:init` | Initialize Capacitor |
-| `npm run cap:sync` | Sync web app to native platforms |
-| `npm run cap:build` | Build and sync for mobile |
-| `npm run cap:open:android` | Open in Android Studio |
+| `npm run cap:build` | Build and sync for Capacitor |
 | `npm run web:deploy` | Deploy to GitHub Pages |
-| `npm run release` | Create tagged release (runs full workflow) |
+| `npm run release` | Create tagged release |
 
-## 🔧 Configuration
+---
 
-### Customization
+## 🧩 Project Structure
 
-1. **App Identity**: Update `appId` in `capacitor.config.json` and `electron-builder.json`
-2. **App Name**: Update `appName` in `capacitor.config.json` and `productName` in `electron-builder.json`
-3. **Package**: Update `name`, `description`, `author` in `package.json`
-4. **Styling**: Modify `src/index.css`
-5. **Functionality**: Extend `src/index.ts`
+```
+template-cross-platform-app/
+├── src/                    # TypeScript source code
+│   ├── index.ts           # Main application (TsDoc required)
+│   ├── index.html         # HTML template
+│   └── index.css          # Styles
+├── docs/                  # User & developer documentation
+│   ├── index.md           # Documentation hub
+│   ├── UserGuide.md       # For app users
+│   ├── Features.md        # Feature walkthrough
+│   ├── DeveloperGuide.md  # For developers
+│   ├── API.md             # API overview
+│   ├── generated/         # Auto-generated API docs (TypeDoc)
+│   └── images/            # Screenshots
+├── dist/                  # Build output (generated)
+│   ├── index.js           # Bundled JavaScript
+│   ├── index.js.map       # Source maps
+│   └── docs/              # Documentation (offline access)
+├── electron/              # Electron desktop app
+│   └── main.js           # Electron main process
+├── scripts/               # Build scripts
+│   ├── dev.js            # Development server
+│   ├── build.js          # Production build
+│   └── release.sh        # Release automation
+└── .github/workflows/     # CI/CD
+    └── release.yml       # Automated releases
+```
 
-### GitHub Pages
+---
 
-1. Enable GitHub Pages in repository settings
-2. Set source to "GitHub Actions"
-3. The workflow will deploy to `https://<username>.github.io/<repo-name>/`
+## 🔒 Code Quality
+
+**Mandatory TsDoc** on all public classes, methods, and functions:
+
+```typescript
+/**
+ * @class MyComponent
+ * Brief description of purpose.
+ * 
+ * @param {string} label - Parameter description.
+ * @returns {HTMLElement} - Return value description.
+ * 
+ * @example
+ * const comp = new MyComponent("Hello");
+ * 
+ * @remarks
+ * - Accessibility: ARIA support details
+ * - Performance: <1ms operation
+ */
+```
+
+**Pre-commit hooks** enforce:
+- ESLint validation
+- TsDoc completeness
+- TypeDoc generation validation
+
+See [CODE_GUIDELINES.md](CODE_GUIDELINES.md) for complete standards.
+
+---
+
+## 🚀 Deployment
+
+### Automated (Recommended)
+
+Tag a release to trigger GitHub Actions:
+```bash
+npm run release v1.0.0
+```
+
+**Deploys automatically**:
+- Web app to GitHub Pages
+- Electron packages for Windows/Mac/Linux
+- Capacitor APK for Android
+- GitHub Release with all assets
+
+### Manual
+
+```bash
+npm run web:deploy        # Deploy to GitHub Pages
+npm run electron:build    # Build desktop packages
+npm run cap:build         # Build mobile apps
+```
+
+See [Developer Guide](docs/DeveloperGuide.md) for detailed deployment instructions.
+
+---
 
 ## 🤝 Contributing
 
-This is a template repository. Use it as a starting point for your own projects!
+Contributions welcome! See [Contributing Guide](docs/Contributing.md) for:
+- Reporting bugs
+- Suggesting features
+- Code contribution workflow
+- Development standards
+
+**Before contributing**: Read [CODE_GUIDELINES.md](CODE_GUIDELINES.md)
+
+---
 
 ## 📄 License
 
-MIT License - feel free to use this template for any project.
+MIT License - Use freely for any project.
 
-## 🆘 Troubleshooting
+---
 
-### Common Issues
+## 🔗 Links
 
-**Build fails with missing modules:**
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
+- **Documentation**: [/docs](docs/index.md)
+- **Issues**: [GitHub Issues](https://github.com/TheJusticeMan/template-cross-platform-app/issues)
+- **Releases**: [GitHub Releases](https://github.com/TheJusticeMan/template-cross-platform-app/releases)
+- **Discussions**: [GitHub Discussions](https://github.com/TheJusticeMan/template-cross-platform-app/discussions)
 
-**Electron window doesn't open:**
-- Ensure `npm run build` was run first
-- Check console for errors
+---
 
-**Capacitor sync fails:**
-- Run `npm run cap:init` first
-- Ensure `dist/` directory exists
-
-**Android build fails:**
-- Verify Java 17+ is installed
-- Check Android SDK is properly configured
-
-## 🔗 Resources
-
-- [TypeScript Documentation](https://www.typescriptlang.org/)
-- [ESBuild Documentation](https://esbuild.github.io/)
-- [Electron Documentation](https://www.electronjs.org/)
-- [Capacitor Documentation](https://capacitorjs.com/)
-- [GitHub Actions Documentation](https://docs.github.com/actions)
+**Built with TypeScript, ESBuild, Electron, and Capacitor. No frameworks—just standards.**
