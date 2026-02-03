@@ -267,7 +267,6 @@ git push origin v1.0.0
 | `npm run cap:open:android` | Open in Android Studio |
 | `npm run web:deploy` | Deploy to GitHub Pages |
 | `npm run release` | Create tagged release (runs full workflow) |
-| `npm run release` | Create tagged release |
 
 ## 🔧 Configuration
 

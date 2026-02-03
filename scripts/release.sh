@@ -40,8 +40,9 @@ if [[ -n $(git status -s) ]]; then
 fi
 
 # Run tests
-echo "Running lint..."
+echo "Running lint and docs validation..."
 npm run lint
+npm run docs:validate
 
 # Build production
 echo "Building production..."
