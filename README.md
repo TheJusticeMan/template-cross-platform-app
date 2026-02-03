@@ -122,6 +122,7 @@ See [Developer Guide](docs/DeveloperGuide.md) for complete instructions.
 | `npm run cap:build`      | Build and sync for Capacitor              |
 | `npm run web:deploy`     | Deploy to GitHub Pages                    |
 | `npm run release`        | Create tagged release                     |
+| `npm run verify:builds`  | Verify all build targets work correctly   |
 
 ---
 
@@ -185,6 +186,27 @@ template-cross-platform-app/
 - TypeDoc generation validation
 
 See [CODE_GUIDELINES.md](CODE_GUIDELINES.md) for complete standards.
+
+---
+
+## ✅ Build Verification
+
+**Verify all build targets work correctly:**
+
+```bash
+npm run verify:builds
+```
+
+This comprehensive script tests:
+
+- ✓ ESLint validation
+- ✓ Prettier formatting
+- ✓ Web production build
+- ✓ Documentation generation
+- ✓ Electron package creation
+- ✓ Capacitor sync
+
+See [BUILD_NOTES.md](BUILD_NOTES.md) for detailed build configuration and troubleshooting.
 
 ---
 

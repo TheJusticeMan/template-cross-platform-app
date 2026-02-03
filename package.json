@@ -24,7 +24,8 @@
     "cap:build": "npm run build && cap copy && cap sync",
     "cap:open:android": "cap open android",
     "web:deploy": "gh-pages -d dist",
-    "release": "bash scripts/release.sh"
+    "release": "bash scripts/release.sh",
+    "verify:builds": "bash scripts/verify-builds.sh"
   },
   "keywords": [
     "typescript",
@@ -34,12 +35,16 @@
     "cross-platform",
     "template"
   ],
-  "author": "",
+  "author": {
+    "name": "Template Author",
+    "email": "template@example.com",
+    "url": "https://github.com/TheJusticeMan/template-cross-platform-app"
+  },
   "license": "MIT",
   "devDependencies": {
-    "@capacitor/android": "^8.0.2",
-    "@capacitor/cli": "^8.0.2",
-    "@capacitor/core": "^8.0.2",
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0",
     "@eslint/js": "^9.39.2",
     "@types/node": "^25.2.0",
     "esbuild": "^0.27.2",
