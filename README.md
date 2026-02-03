@@ -2,39 +2,69 @@
 
 A comprehensive template for building cross-platform applications with TypeScript, ESBuild, Electron, and Capacitor. Deploy to web (GitHub Pages), desktop (Windows/Mac/Linux), and mobile (Android/iOS).
 
+> **📚 Full Documentation**: See [/docs](docs/) for comprehensive guides. Start with [Setup.md](docs/Setup.md).
+>
+> **👨‍💻 AI/Human Contributors**: Read [CODE_GUIDELINES.md](CODE_GUIDELINES.md) before contributing.
+
 ## 🚀 Features
 
-- **TypeScript** - Type-safe development
-- **ESBuild** - Lightning-fast builds
+- **TypeScript** - Type-safe development with strict mode
+- **ESBuild** - Lightning-fast builds (<5ms)
   - Development: Watch mode, live reload, inline source maps
   - Production: Minification, external source maps
-- **ESLint** - Code quality and consistency
+- **ESLint** - Code quality with **mandatory TsDoc** (enforced via eslint-plugin-jsdoc)
 - **Electron** - Desktop application support (Windows, Mac, Linux)
 - **Capacitor** - Mobile application support (Android, iOS)
-- **GitHub Pages** - Automated web deployment
+- **GitHub Pages** - Automated web deployment with `/docs` included
 - **GitHub Actions** - CI/CD pipeline with automatic releases
+- **Documentation** - Comprehensive `/docs` bundled with builds for offline access
+
+## 📚 User Help
+
+All documentation is bundled with production builds (`dist/docs/`) and deployed to GitHub Pages:
+
+- **[Setup.md](docs/Setup.md)** - Quickstart guide with first GUI tweak example
+- **[Build.md](docs/Build.md)** - Platform-specific builds (web/desktop/mobile) and sourcemap debugging
+- **[Deploy.md](docs/Deploy.md)** - Release process, GitHub Pages, custom hosting
+- **[API.md](docs/API.md)** - Auto-scaffolded public API overview (from TsDoc)
+- **[Troubleshooting.md](docs/Troubleshooting.md)** - Common issues with reflective fixes
+- **[Contributing.md](docs/Contributing.md)** - How to extend without bloat
+
+**Preview docs locally**:
+```bash
+npm run docs:serve
+# Opens at http://localhost:8001
+```
 
 ## 📁 Project Structure
 
 ```
 .
 ├── src/                    # Source files
-│   ├── index.ts           # Main TypeScript application
+│   ├── index.ts           # Main TypeScript application (TsDoc mandatory)
 │   ├── index.html         # HTML template
 │   └── index.css          # Styles
+├── docs/                  # User documentation (bundled to dist/docs/)
+│   ├── Setup.md
+│   ├── Build.md
+│   ├── Deploy.md
+│   ├── API.md
+│   ├── Troubleshooting.md
+│   └── Contributing.md
 ├── dist/                  # Build output (generated)
+│   └── docs/              # Docs copied here for offline access
 ├── electron/              # Electron-specific files
 │   └── main.js           # Electron main process
-├── capacitor/             # Capacitor configuration
 ├── scripts/               # Build scripts
 │   ├── dev.js            # Development server
-│   ├── build.js          # Production build
+│   ├── build.js          # Production build (copies docs)
 │   └── release.sh        # Release automation
 ├── .github/workflows/     # GitHub Actions
-│   └── release.yml       # Release workflow
+│   └── release.yml       # Release workflow (deploys docs to Pages)
+├── CODE_GUIDELINES.md     # Agent & contributor standards
 ├── package.json           # Dependencies and scripts
 ├── tsconfig.json          # TypeScript configuration
-├── eslint.config.js       # ESLint configuration
+├── eslint.config.js       # ESLint with jsdoc rules
 ├── capacitor.config.json  # Capacitor configuration
 └── electron-builder.json  # Electron Builder configuration
 ```
@@ -132,6 +162,10 @@ Then build in Android Studio or Xcode.
 
 ## 🧹 Code Quality
 
+### Linting with TsDoc Enforcement
+
+This template **requires TsDoc** (JSDoc-compatible) on all classes, functions, methods, and interfaces. Enforced via `eslint-plugin-jsdoc`.
+
 Run ESLint:
 ```bash
 npm run lint
@@ -141,6 +175,36 @@ Fix linting issues automatically:
 ```bash
 npm run lint:fix
 ```
+
+Validate documentation completeness:
+```bash
+npm run docs:validate
+```
+
+**TsDoc Template** (see [CODE_GUIDELINES.md](CODE_GUIDELINES.md) for full details):
+```typescript
+/**
+ * @class ClassName
+ * Brief description: What it does, why it exists.
+ * 
+ * @param {Type} paramName - Detailed description with constraints.
+ * @returns {ReturnType} - What it returns, success/failure cases.
+ * 
+ * @example
+ * // Usage example
+ * const instance = new ClassName(arg);
+ * 
+ * @remarks
+ * - Accessibility: ARIA/keyboard support.
+ * - Ethics: User impact, transparency.
+ * - Edge Cases: Error handling, performance.
+ * - Thematic Tie: Reflective note (e.g., "Like Polaroid truth").
+ * - Version: 1.0.0
+ * - Author: Your Name
+ */
+```
+
+Missing or incomplete TsDoc will **fail linting**. This ensures maintainability and API clarity.
 
 ## 🚀 Deployment
 
@@ -189,9 +253,12 @@ git push origin v1.0.0
 | Script | Description |
 |--------|-------------|
 | `npm run dev` | Start development server with hot reload |
-| `npm run build` | Build production bundle |
-| `npm run lint` | Run ESLint |
-| `npm run lint:fix` | Fix ESLint issues |
+| `npm run build` | Build production bundle (includes copying docs) |
+| `npm run lint` | Run ESLint with TsDoc validation |
+| `npm run lint:fix` | Fix ESLint issues automatically |
+| `npm run docs:build` | Build and copy docs to dist/docs |
+| `npm run docs:validate` | Validate TsDoc completeness |
+| `npm run docs:serve` | Preview docs locally (port 8001) |
 | `npm run electron:dev` | Run app in Electron |
 | `npm run electron:build` | Build Electron packages |
 | `npm run cap:init` | Initialize Capacitor |
@@ -199,6 +266,7 @@ git push origin v1.0.0
 | `npm run cap:build` | Build and sync for mobile |
 | `npm run cap:open:android` | Open in Android Studio |
 | `npm run web:deploy` | Deploy to GitHub Pages |
+| `npm run release` | Create tagged release (runs full workflow) |
 | `npm run release` | Create tagged release |
 
 ## 🔧 Configuration

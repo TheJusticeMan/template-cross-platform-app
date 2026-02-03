@@ -9,6 +9,9 @@
     "build": "node scripts/build.js",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
+    "docs:build": "npm run build && cp -r docs dist/docs",
+    "docs:validate": "eslint src/**/*.ts",
+    "docs:serve": "npx serve docs -p 8001",
     "electron:dev": "npm run build && electron electron/main.js",
     "electron:build": "npm run build && electron-builder",
     "cap:init": "cap init",
@@ -38,7 +41,10 @@
     "electron": "^28.0.0",
     "electron-builder": "^24.0.0",
     "eslint": "^9.0.0",
+    "eslint-plugin-jsdoc": "^50.0.0",
     "gh-pages": "^6.0.0",
+    "husky": "^9.0.0",
+    "serve": "^14.0.0",
     "typescript": "^5.3.0",
     "typescript-eslint": "^8.0.0"
   }

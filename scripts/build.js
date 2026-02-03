@@ -28,6 +28,24 @@ if (fs.existsSync(nojekyllPath)) {
   fs.copyFileSync(nojekyllPath, path.join(distDir, '.nojekyll'));
 }
 
+// Copy docs directory for offline access
+const docsDir = path.join(__dirname, '..', 'docs');
+const distDocsDir = path.join(distDir, 'docs');
+if (fs.existsSync(docsDir)) {
+  if (!fs.existsSync(distDocsDir)) {
+    fs.mkdirSync(distDocsDir, { recursive: true });
+  }
+  const docFiles = fs.readdirSync(docsDir);
+  docFiles.forEach(file => {
+    if (file.endsWith('.md')) {
+      fs.copyFileSync(
+        path.join(docsDir, file),
+        path.join(distDocsDir, file)
+      );
+    }
+  });
+}
+
 // ESBuild configuration for production
 const buildOptions = {
   entryPoints: [path.join(srcDir, 'index.ts')],
@@ -48,6 +66,7 @@ async function build() {
     
     console.log('✅ Build completed successfully!\n');
     console.log(`📦 Output: ${distDir}\n`);
+    console.log(`📚 Docs copied to: ${distDocsDir}\n`);
   } catch (error) {
     console.error('❌ Build failed:', error);
     process.exit(1);
