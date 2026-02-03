@@ -19,7 +19,8 @@
     "cap:build": "npm run build && cap copy && cap sync",
     "cap:open:android": "cap open android",
     "web:deploy": "gh-pages -d dist",
-    "release": "bash scripts/release.sh"
+    "release": "bash scripts/release.sh",
+    "prepare": "husky"
   },
   "keywords": [
     "typescript",
