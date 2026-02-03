@@ -22,6 +22,11 @@ fs.copyFileSync(
   path.join(srcDir, 'index.css'),
   path.join(distDir, 'index.css')
 );
+// Copy .nojekyll for GitHub Pages
+const nojekyllPath = path.join(srcDir, '.nojekyll');
+if (fs.existsSync(nojekyllPath)) {
+  fs.copyFileSync(nojekyllPath, path.join(distDir, '.nojekyll'));
+}
 
 // ESBuild configuration for development
 const buildOptions = {
