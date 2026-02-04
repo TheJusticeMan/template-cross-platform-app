@@ -1,0 +1,8 @@
+{
+  "appId": "com.template.crossplatform",
+  "appName": "Cross-Platform App",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}

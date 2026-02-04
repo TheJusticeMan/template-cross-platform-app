@@ -1,0 +1,28 @@
+# Build outputs
+dist/
+electron-dist/
+
+# Generated documentation
+docs/generated/
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Platform-specific
+android/
+ios/
+.capacitor/
+
+# Cache and temp files
+*.tsbuildinfo
+.eslintcache
+coverage/
+tmp/
+temp/
+
+# Logs
+*.log
+
+# Git
+.git/

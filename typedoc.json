@@ -1,0 +1,22 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "out": "docs/generated",
+  "plugin": ["typedoc-plugin-markdown"],
+  "readme": "none",
+  "includeVersion": true,
+  "exclude": ["**/node_modules/**", "**/dist/**", "**/*.spec.ts", "**/*.test.ts"],
+  "excludePrivate": false,
+  "excludeProtected": false,
+  "excludeExternals": true,
+  "categorizeByGroup": true,
+  "categoryOrder": ["Classes", "Interfaces", "Functions", "Types", "*"],
+  "sort": ["source-order"],
+  "gitRevision": "main",
+  "hideGenerator": true,
+  "name": "Cross-Platform App API",
+  "navigationLinks": {
+    "User Guide": "UserGuide.md",
+    "Features": "Features.md"
+  }
+}

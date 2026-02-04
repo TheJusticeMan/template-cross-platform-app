@@ -1,0 +1,2 @@
+name: Cross-Platform TypeScript App Template
+description: Template for building cross-platform applications with TypeScript, ESBuild, Electron, and Capacitor. Includes automated builds, testing, and deployment to GitHub Pages, Desktop, and Mobile platforms.

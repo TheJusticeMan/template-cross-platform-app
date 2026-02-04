@@ -1,0 +1,126 @@
+# Cursor AI Rules for Cross-Platform TypeScript App
+
+You are an expert TypeScript developer working on a cross-platform application template. Follow these guidelines strictly.
+
+## Project Overview
+
+This is a vanilla TypeScript template for building cross-platform apps (web, desktop via Electron, mobile via Capacitor). No frameworks—pure native APIs with ESBuild for bundling.
+
+## Core Principles
+
+1. **Vanilla Purity**: No React, Vue, Angular, jQuery. Use native DOM APIs only.
+2. **Type Safety**: Strict TypeScript mode. Never use `any`.
+3. **Accessibility First**: Semantic HTML, ARIA attributes, keyboard navigation mandatory.
+4. **Documentation**: Complete TsDoc on all public members (enforced by linting).
+
+## Code Standards
+
+- Indentation: 2 spaces
+- Line length: 100 characters max
+- Use single quotes for strings
+- Semicolons required
+- ES2020+ features
+
+## File Structure
+
+```
+src/          - TypeScript source
+docs/         - User and developer documentation
+docs/generated/ - Auto-generated API docs (TypeDoc)
+dist/         - Build output (gitignored)
+scripts/      - Build and dev scripts
+electron/     - Electron main process
+```
+
+## Development Workflow
+
+1. Run `npm run dev` for hot-reload development
+2. Run `npm run lint` before committing
+3. Run `npm run docs:generate` after changing TsDoc
+4. Run `npm run build` for production
+
+## TsDoc Template (Mandatory)
+
+```typescript
+/**
+ * @class ClassName
+ * Brief description of purpose.
+ * 
+ * @param {Type} paramName - Parameter description.
+ * @returns {ReturnType} - Return value description.
+ * 
+ * @example
+ * const instance = new ClassName(arg);
+ * 
+ * @remarks
+ * - Accessibility: ARIA support details
+ * - Performance: Benchmark info
+ * - Edge Cases: Error handling
+ */
+```
+
+## When Adding Code
+
+1. ✅ Use native DOM APIs (querySelector, addEventListener, createElement)
+2. ✅ Add complete TsDoc comments
+3. ✅ Ensure accessibility (ARIA, semantic HTML, keyboard nav)
+4. ✅ Keep bundle small (<100KB total)
+5. ✅ Test cross-platform (browser, Electron, Capacitor)
+6. ❌ Never add frameworks or heavy libraries
+7. ❌ Never use `any` type
+8. ❌ Never skip documentation
+
+## Common Tasks
+
+### Add New Component
+1. Create class in src/
+2. Add complete TsDoc
+3. Implement with native APIs
+4. Ensure accessibility
+5. Run docs:generate
+6. Update user guides if needed
+
+### Fix Bug
+1. Read error logs carefully
+2. Check CODE_GUIDELINES.md
+3. Fix at source, not symptom
+4. Add TsDoc if missing
+5. Test thoroughly
+
+### Refactor
+1. Preserve vanilla purity
+2. Update TsDoc
+3. Run lint and build
+4. Verify bundle size
+
+## Testing
+
+- Run `npm run lint` for code quality
+- Run `npm run build` to verify production build
+- Run `npm run dev` and manually test in browser
+- Test with Electron: `npm run electron:dev`
+
+## Documentation
+
+- User-facing docs in /docs (UserGuide.md, Features.md, etc.)
+- API docs auto-generated from TsDoc in docs/generated/
+- Always update docs when changing behavior
+
+## Key Files to Read
+
+- CODE_GUIDELINES.md - Complete coding standards
+- docs/DeveloperGuide.md - Build and deploy instructions
+- package.json - Available scripts
+- tsconfig.json - TypeScript configuration
+
+## Pre-commit Hooks
+
+Husky runs these automatically:
+- npm run lint
+- npm run docs:validate
+
+Ensure they pass before committing.
+
+## Remember
+
+Every line matters. Keep code minimal, documented, and accessible. When in doubt, check CODE_GUIDELINES.md or ask for clarification.
