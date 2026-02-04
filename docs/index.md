@@ -16,6 +16,7 @@ Start here if you're using the application's GUI and features:
 Start here if you're building, extending, or contributing to the code:
 
 - **[Developer Guide](DeveloperGuide.md)** - Build, deploy, and extend
+- **[DOM Extensions](DOMExtensions.md)** - Obsidian-style element creation utilities
 - **[API Reference](generated/README.md)** - Technical API documentation
 - **[Contributing](Contributing.md)** - Contribution guidelines
 - **[Changelog](Changelog.md)** - Version history

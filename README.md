@@ -87,6 +87,42 @@ See [Developer Guide](docs/DeveloperGuide.md) for complete instructions.
 - **Auto-Generated Docs**: TypeDoc creates API docs from TsDoc comments
 - **Strict Quality**: Enforced documentation, linting, pre-commit validation
 - **Bundle Size**: 1KB minified JS (your code), <80KB total with docs
+- **DOM Extensions**: Obsidian-style utilities for element creation and styling
+
+---
+
+## 🎨 DOM Extensions
+
+Built-in utilities for creating and styling DOM elements with a clean, declarative API:
+
+```typescript
+// Import extensions
+import './dom-extensions';
+
+// Create elements declaratively
+const card = document.body.createDiv({ cls: 'card' }).setCssStyles({
+  padding: '1.5rem',
+  borderRadius: '8px',
+  boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+});
+
+// Add content with options and callbacks
+card.createEl('h2', { text: 'Card Title' });
+card.createEl('button', { text: 'Click Me' }, (btn) => {
+  btn.addEventListener('click', () => alert('Clicked!'));
+});
+```
+
+Features:
+
+- `createEl`, `createDiv`, `createSpan`, `createSvg` - Element creation
+- `setCssStyles` - Batch style application
+- `setCssProps` - CSS custom properties (variables)
+- `setText` - Get/set text content
+- Full TypeScript support with generics
+- Method chaining for fluent API
+
+See **[DOM Extensions Documentation](docs/DOMExtensions.md)** for complete API and examples.
 
 ---
 

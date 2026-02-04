@@ -43,6 +43,36 @@ All components include built-in accessibility:
 
 **Testing**: Use browser DevTools Accessibility Inspector or screen readers (NVDA, JAWS, VoiceOver).
 
+## DOM Extensions
+
+The template includes Obsidian-style DOM utility extensions for enhanced element creation and styling. See the complete guide:
+
+📚 **[DOM Extensions Documentation](./DOMExtensions.md)**
+
+Quick example:
+
+```typescript
+// Import extensions in your code
+import './dom-extensions';
+
+// Create elements with declarative API
+const card = document.body.createDiv({ cls: 'card' }).setCssStyles({
+  padding: '1.5rem',
+  borderRadius: '8px',
+  backgroundColor: '#fff',
+});
+
+card.createEl('h2', { text: 'Title' });
+card.createEl('p', { text: 'Content' });
+```
+
+Available methods:
+
+- **Element Creation**: `createEl`, `createDiv`, `createSpan`, `createSvg`
+- **CSS Styling**: `setCssStyles`, `setCssProps`
+- **Text Management**: `setText`, `getText`
+- **Method Chaining**: Fluent API for composition
+
 ## For Developers
 
 ### Core Classes

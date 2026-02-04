@@ -1,3 +1,6 @@
+// Import DOM utility extensions for Obsidian-style API
+import './dom-extensions';
+
 /**
  * @class App
  * Main application class managing UI state, event handlers, and cross-platform environment detection.
