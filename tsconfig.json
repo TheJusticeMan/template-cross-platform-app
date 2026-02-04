@@ -16,5 +16,5 @@
     "rootDir": "./src"
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "electron", "capacitor"]
+  "exclude": ["node_modules", "dist", "electron", "capacitor", "src/dom-extensions-demo.ts"]
 }
